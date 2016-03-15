@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">AndroidUtils</string>
+    <string name="cancel">Abbrechen</string>
+    <string name="lbl_position">%d.</string>
+    <string name="lbl_r">Rot: %d</string>
+    <string name="lbl_g">Grün: %d</string>
+    <string name="lbl_b">Blau: %d</string>
+    <string name="colorpicker">Farbauswahl</string>
+    <string name="lbl_h">Farbwert: %d</string>
+    <string name="lbl_s">Sättigung: %d</string>
+    <string name="lbl_v">Dunkelstufe: %d</string>
+
 </resources>

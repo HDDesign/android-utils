@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ColorView">
+        <attr name="size" format="dimension" />
+        <attr name="hueCircleStrokeWidth" format="dimension" />
+        <attr name="indicatorRadius" format="dimension" />
+    </declare-styleable>
+</resources>
