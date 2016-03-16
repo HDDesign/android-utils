@@ -56,6 +56,7 @@ public class MainActivity extends BaseActivity implements ItemClickListener {
             }
         });
         tilDialog.show();
+
     }
 
     public static Intent newIntent() {
@@ -141,7 +142,7 @@ public class MainActivity extends BaseActivity implements ItemClickListener {
 
     @Override
     public void itemSelected(MainItem item, int position) {
-        startActivityForResult(ColorPickerActivity.newIntent(item.getIndex() - 1), 0);
+        startActivityForResult(ColorPickerActivity.newIntent(item.getIndex() - 1, item.getColor()), 0);
     }
 
     @Override

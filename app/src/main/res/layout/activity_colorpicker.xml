@@ -42,11 +42,10 @@
 
                 <de.hddesign.androidutils.androidutils.custom.ColorView
                     android:id="@+id/colorView"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/xlarge_spacing"
-                    app:size="500dp"
+                    android:layout_margin="@dimen/xlarge_spacing"
                     app:hueCircleStrokeWidth="50dp"/>
 
                 <Button

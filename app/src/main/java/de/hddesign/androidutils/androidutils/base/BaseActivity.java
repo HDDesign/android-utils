@@ -16,7 +16,7 @@ import de.hddesign.androidutils.androidutils.R;
 public class BaseActivity extends AppCompatActivity {
 
     @Bind(R.id.toolbar)
-    Toolbar toolbar;
+    public Toolbar toolbar;
 
     protected static Intent newIntent(Class<? extends AppCompatActivity> activityClass) {
         Intent intent = new Intent();

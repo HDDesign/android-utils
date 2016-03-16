@@ -3,7 +3,11 @@ package de.hddesign.androidutils.androidutils;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.widget.Button;
+import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -61,6 +65,15 @@ public class ColorPickerActivity extends BaseActivity implements SeekbarCallback
 
     @Bind(R.id.btn_ok)
     Button btnOk;
+
+    @Bind(R.id.app_bar_layout)
+    AppBarLayout appBarLayout;
+
+    @Bind(R.id.main_content)
+    CoordinatorLayout mainContent;
+
+    @Bind(R.id.fragment_container)
+    ScrollView fragmentContainer;
 
     @OnClick(R.id.iv_decrease_h)
     public void decreaseH() {
@@ -132,10 +145,12 @@ public class ColorPickerActivity extends BaseActivity implements SeekbarCallback
     }
 
     private int index;
+    private int color;
 
-    public static Intent newIntent(int index) {
+    public static Intent newIntent(int index, int color) {
         Intent intent = newIntent(ColorPickerActivity.class);
         intent.putExtra(INDEX, index);
+        intent.putExtra(PICKED_COLOR, color);
         return intent;
     }
 
@@ -145,12 +160,25 @@ public class ColorPickerActivity extends BaseActivity implements SeekbarCallback
         setContentView(R.layout.activity_colorpicker);
 
         index = getIntent().getIntExtra(INDEX, 0);
+        color = getIntent().getIntExtra(PICKED_COLOR, 0);
 
         showTitle(R.string.colorpicker);
 
         initSeekbars();
 
         colorview.setColorViewCallback(this);
+
+        fragmentContainer.setOnTouchListener(colorview.getColorViewTouchListener());
+    }
+
+    @Override
+    public void onPostCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
+        super.onPostCreate(savedInstanceState, persistentState);
+
+        float hsv[] = new float[3];
+
+        Color.colorToHSV(color, hsv);
+        colorview.setColor(hsv);
     }
 
     private void initSeekbars() {
@@ -215,7 +243,7 @@ public class ColorPickerActivity extends BaseActivity implements SeekbarCallback
             }
         }
 
-        changeButtonColor();
+        changeColors();
     }
 
     @Override
@@ -244,18 +272,25 @@ public class ColorPickerActivity extends BaseActivity implements SeekbarCallback
             colorview.setHSV(seekbarH.getProgress(), seekbarS.getProgress(), seekbarV.getProgress());
         }
 
-        changeButtonColor();
+        changeColors();
     }
 
-    private void changeButtonColor() {
+    private void changeColors() {
         btnOk.setBackgroundColor(colorview.getCurrentColor());
+        toolbar.setBackgroundColor(colorview.getCurrentColor());
+        getWindow().setNavigationBarColor(colorview.getCurrentColor());
+        mainContent.setStatusBarBackgroundColor(colorview.getCurrentColor());
 
-        if (colorview.getHsv()[2] < 0.3f)
+        if (colorview.getHsv()[2] < 0.3f) {
             btnOk.setTextColor(Color.WHITE);
-        else if (colorview.getHsv()[1] < 0.3f)
+            toolbar.setTitleTextColor(Color.WHITE);
+        } else if (colorview.getHsv()[1] < 0.3f) {
             btnOk.setTextColor(Color.BLACK);
-        else
+            toolbar.setTitleTextColor(Color.BLACK);
+        } else {
             btnOk.setTextColor(Color.WHITE);
+            toolbar.setTitleTextColor(Color.WHITE);
+        }
     }
 
     @Override
