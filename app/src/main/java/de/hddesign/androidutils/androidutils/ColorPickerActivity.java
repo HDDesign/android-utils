@@ -1,7 +1,9 @@
 package de.hddesign.androidutils.androidutils;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -14,6 +16,9 @@ import de.hddesign.androidutils.androidutils.utils.LableSliderSeekBarChangeListe
 import de.hddesign.androidutils.androidutils.utils.LableSliderSeekBarChangeListener.SeekbarCallback;
 
 public class ColorPickerActivity extends BaseActivity implements SeekbarCallback, ColorViewCallback {
+
+    public static final String PICKED_COLOR = "pickedColor";
+    public static final String INDEX = "index";
 
     @Bind(R.id.colorView)
     ColorView colorview;
@@ -53,6 +58,9 @@ public class ColorPickerActivity extends BaseActivity implements SeekbarCallback
 
     @Bind(R.id.seekbar_b)
     SeekBar seekbarB;
+
+    @Bind(R.id.btn_ok)
+    Button btnOk;
 
     @OnClick(R.id.iv_decrease_h)
     public void decreaseH() {
@@ -114,14 +122,29 @@ public class ColorPickerActivity extends BaseActivity implements SeekbarCallback
         seekbarB.setProgress(seekbarB.getProgress() + 5);
     }
 
-    public static Intent newIntent() {
-        return newIntent(ColorPickerActivity.class);
+    @OnClick(R.id.btn_ok)
+    public void onOkayClicked() {
+        Intent data = new Intent();
+        data.putExtra(PICKED_COLOR, colorview.getCurrentColor());
+        data.putExtra(INDEX, index);
+        setResult(RESULT_OK, data);
+        this.finish();
+    }
+
+    private int index;
+
+    public static Intent newIntent(int index) {
+        Intent intent = newIntent(ColorPickerActivity.class);
+        intent.putExtra(INDEX, index);
+        return intent;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_colorpicker);
+
+        index = getIntent().getIntExtra(INDEX, 0);
 
         showTitle(R.string.colorpicker);
 
@@ -191,6 +214,8 @@ public class ColorPickerActivity extends BaseActivity implements SeekbarCallback
                 colorview.setHSV(seekbarH.getProgress(), seekbarS.getProgress(), seekbarV.getProgress());
             }
         }
+
+        changeButtonColor();
     }
 
     @Override
@@ -218,6 +243,19 @@ public class ColorPickerActivity extends BaseActivity implements SeekbarCallback
         if (id == ColorView.VALUE) {
             colorview.setHSV(seekbarH.getProgress(), seekbarS.getProgress(), seekbarV.getProgress());
         }
+
+        changeButtonColor();
+    }
+
+    private void changeButtonColor() {
+        btnOk.setBackgroundColor(colorview.getCurrentColor());
+
+        if (colorview.getHsv()[2] < 0.3f)
+            btnOk.setTextColor(Color.WHITE);
+        else if (colorview.getHsv()[1] < 0.3f)
+            btnOk.setTextColor(Color.BLACK);
+        else
+            btnOk.setTextColor(Color.WHITE);
     }
 
     @Override

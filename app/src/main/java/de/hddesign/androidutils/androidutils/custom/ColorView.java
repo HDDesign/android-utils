@@ -15,7 +15,6 @@ import android.graphics.RadialGradient;
 import android.graphics.Shader.TileMode;
 import android.graphics.SweepGradient;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -345,17 +344,16 @@ public class ColorView extends View implements OnTouchListener {
             this.invalidate();
             return true;
         } else if (isPointOnHueWheel(eventP)){
-            PointF a = eventP;
-            PointF b = new PointF(a.x, 0);
+            PointF b = new PointF(eventP.x, 0);
 
             double sideA = distanceBetweenPoints(b, CENTER);
-            double sideB = distanceBetweenPoints(a, CENTER);
-            double sideC = distanceBetweenPoints(a, b);
+            double sideB = distanceBetweenPoints(eventP, CENTER);
+            double sideC = distanceBetweenPoints(eventP, b);
 
             double angleAlpha = Math.toDegrees(Math.acos(((sideA * sideA) - (sideC * sideC) - (sideB * sideB)) / (-2 * (sideB * sideC))));
 
-            float originXFromCenter = a.x - (size / 2);
-            float originYFromCenter = a.y - (size / 2);
+            float originXFromCenter = eventP.x - (size / 2);
+            float originYFromCenter = eventP.y - (size / 2);
 
             if (originXFromCenter < 0 && originYFromCenter > 0)
                 angleAlpha += 90;
@@ -374,8 +372,6 @@ public class ColorView extends View implements OnTouchListener {
             if(colorViewCallback != null)
                 colorViewCallback.hsvChanged(hsv[0], hsv[1] * 100, hsv[2] * 100);
 
-            Log.d("ColorView", String.format("onTouch: %f", hsv[0]));
-
             this.invalidate();
             return true;
         }
@@ -383,13 +379,13 @@ public class ColorView extends View implements OnTouchListener {
         return false;
     }
 
-    private boolean isPointOnHueWheel(PointF eventP) {
-        return distanceBetweenPoints(eventP, CENTER) > size/2 - hueCircleStrokeWidth/2 && distanceBetweenPoints(eventP, CENTER) < size/2 + hueCircleStrokeWidth/2;
-    }
-
     /***********************************************/
     /*************** POINT OPERATIONS **************/
     /***********************************************/
+
+    private boolean isPointOnHueWheel(PointF eventP) {
+        return distanceBetweenPoints(eventP, CENTER) > size / 2 - hueCircleStrokeWidth / 2 && distanceBetweenPoints(eventP, CENTER) < size / 2 + hueCircleStrokeWidth / 2;
+    }
 
     public static PointF getLineLineIntersection(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4) {
         double det1And2 = det(x1, y1, x2, y2);
@@ -400,7 +396,6 @@ public class ColorView extends View implements OnTouchListener {
         double y3LessY4 = y3 - y4;
         double det1Less2And3Less4 = det(x1LessX2, y1LessY2, x3LessX4, y3LessY4);
         if (det1Less2And3Less4 == 0){
-            // the denominator is zero so the lines are parallel and there's either no solution (or multiple solutions if the lines overlap) so return null.
             return null;
         }
         double x = (det(det1And2, x1LessX2,
@@ -488,6 +483,10 @@ public class ColorView extends View implements OnTouchListener {
         this.hsv[2] = value / 100f;
         calcRGBfromCurrentHSV();
         this.invalidate();
+    }
+
+    public float[] getHsv() {
+        return hsv;
     }
 
     public void setRed(int red) {

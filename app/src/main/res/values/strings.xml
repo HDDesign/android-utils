@@ -9,5 +9,10 @@
     <string name="lbl_h">Farbwert: %d</string>
     <string name="lbl_s">Sättigung: %d</string>
     <string name="lbl_v">Dunkelstufe: %d</string>
+    <string name="ok">Übernehmen</string>
+    <string name="item_name">Name</string>
+    <string name="title_mainitem_create">Neuer Eintrag</string>
+    <string name="error_min_max_length">Zwischen %1$d und %2$d Zeichen erforderlich</string>
+    <string name="create">Erstellen</string>
 
 </resources>

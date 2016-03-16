@@ -12,7 +12,7 @@
         android:layout_marginRight="@dimen/material_dialog_spacing"
         android:layout_marginTop="@dimen/medium_spacing">
 
-        <EditText
+        <android.support.design.widget.TextInputEditText
             android:id="@+id/et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
