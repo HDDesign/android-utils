@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout
+    android:id="@+id/drawer_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/main_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.design.widget.AppBarLayout
+                android:id="@+id/app_bar_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fitsSystemWindows="true"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="?attr/colorPrimary"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+            </android.support.design.widget.AppBarLayout>
+
+            <de.hddesign.androidutils.androidutils.custom.DPad
+                android:id="@+id/dpad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/app_bar_layout"
+                android:layout_centerInParent="true"
+                android:layout_margin="@dimen/xlarge_spacing"/>
+
+            <ScrollView
+                android:id="@+id/sliders"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/dpad">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txt_center_button_size"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/medium_spacing"
+                        android:text="@string/lbl_center_button_size"
+                        android:textSize="@dimen/large_text"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/iv_decrease_size"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/card_ripple"
+                            android:padding="@dimen/medium_spacing"
+                            android:src="@drawable/ic_remove"
+                            android:tint="@color/colorPrimary"/>
+
+                        <android.support.v7.widget.AppCompatSeekBar
+                            android:id="@+id/seekbar_size"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="@dimen/medium_spacing"/>
+
+                        <ImageView
+                            android:id="@+id/iv_increase_size"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/card_ripple"
+                            android:padding="@dimen/medium_spacing"
+                            android:src="@drawable/ic_add"
+                            android:tint="@color/colorPrimary"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/txt_padding_size"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/medium_spacing"
+                        android:text="@string/lbl_center_button_size"
+                        android:textSize="@dimen/large_text"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/iv_decrease_padding"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/card_ripple"
+                            android:padding="@dimen/medium_spacing"
+                            android:src="@drawable/ic_remove"
+                            android:tint="@color/colorPrimary"/>
+
+                        <android.support.v7.widget.AppCompatSeekBar
+                            android:id="@+id/seekbar_padding"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="@dimen/medium_spacing"/>
+
+                        <ImageView
+                            android:id="@+id/iv_increase_padding"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/card_ripple"
+                            android:padding="@dimen/medium_spacing"
+                            android:src="@drawable/ic_add"
+                            android:tint="@color/colorPrimary"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/txt_chevron_size"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/medium_spacing"
+                        android:text="@string/lbl_center_button_size"
+                        android:textSize="@dimen/large_text"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/iv_decrease_chevron"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/card_ripple"
+                            android:padding="@dimen/medium_spacing"
+                            android:src="@drawable/ic_remove"
+                            android:tint="@color/colorPrimary"/>
+
+                        <android.support.v7.widget.AppCompatSeekBar
+                            android:id="@+id/seekbar_chevron"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="@dimen/medium_spacing"/>
+
+                        <ImageView
+                            android:id="@+id/iv_increase_chevron"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/card_ripple"
+                            android:padding="@dimen/medium_spacing"
+                            android:src="@drawable/ic_add"
+                            android:tint="@color/colorPrimary"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/txt_chevron_stroke"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/medium_spacing"
+                        android:text="@string/lbl_center_button_size"
+                        android:textSize="@dimen/large_text"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/iv_decrease_chevron_stroke"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/card_ripple"
+                            android:padding="@dimen/medium_spacing"
+                            android:src="@drawable/ic_remove"
+                            android:tint="@color/colorPrimary"/>
+
+                        <android.support.v7.widget.AppCompatSeekBar
+                            android:id="@+id/seekbar_chevron_stroke"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="@dimen/medium_spacing"/>
+
+                        <ImageView
+                            android:id="@+id/iv_increase_chevron_stroke"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/card_ripple"
+                            android:padding="@dimen/medium_spacing"
+                            android:src="@drawable/ic_add"
+                            android:tint="@color/colorPrimary"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/txt_chevron_padding"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/medium_spacing"
+                        android:text="@string/lbl_center_button_size"
+                        android:textSize="@dimen/large_text"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/iv_decrease_chevron_padding"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/card_ripple"
+                            android:padding="@dimen/medium_spacing"
+                            android:src="@drawable/ic_remove"
+                            android:tint="@color/colorPrimary"/>
+
+                        <android.support.v7.widget.AppCompatSeekBar
+                            android:id="@+id/seekbar_chevron_padding"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="@dimen/medium_spacing"/>
+
+                        <ImageView
+                            android:id="@+id/iv_increase_chevron_padding"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/card_ripple"
+                            android:padding="@dimen/medium_spacing"
+                            android:src="@drawable/ic_add"
+                            android:tint="@color/colorPrimary"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/txt_text_size"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/medium_spacing"
+                        android:text="@string/lbl_center_button_size"
+                        android:textSize="@dimen/large_text"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/iv_decrease_text_size"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/card_ripple"
+                            android:padding="@dimen/medium_spacing"
+                            android:src="@drawable/ic_remove"
+                            android:tint="@color/colorPrimary"/>
+
+                        <android.support.v7.widget.AppCompatSeekBar
+                            android:id="@+id/seekbar_text_size"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="@dimen/medium_spacing"/>
+
+                        <ImageView
+                            android:id="@+id/iv_increase_text_size"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/card_ripple"
+                            android:padding="@dimen/medium_spacing"
+                            android:src="@drawable/ic_add"
+                            android:tint="@color/colorPrimary"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <View
+                            android:id="@+id/v_primary_color"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="@dimen/medium_spacing"
+                            android:layout_weight="1"
+                            android:clickable="true"
+                            android:foreground="@drawable/card_ripple"
+                            tools:background="@color/colorPrimary"/>
+
+                        <View
+                            android:id="@+id/v_accent_color"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="@dimen/medium_spacing"
+                            android:layout_weight="1"
+                            android:clickable="true"
+                            android:foreground="@drawable/card_ripple"
+                            tools:background="@color/colorPrimary"/>
+
+                        <View
+                            android:id="@+id/v_chevron_color"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="@dimen/medium_spacing"
+                            android:layout_weight="1"
+                            android:clickable="true"
+                            android:foreground="@drawable/card_ripple"
+                            tools:background="@color/colorPrimary"/>
+
+                        <View
+                            android:id="@+id/v_backgroundcolor"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="@dimen/medium_spacing"
+                            android:layout_weight="1"
+                            android:clickable="true"
+                            android:foreground="@drawable/card_ripple"
+                            tools:background="@color/colorPrimary"/>
+
+                        <View
+                            android:id="@+id/v_windowcolor"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="@dimen/medium_spacing"
+                            android:layout_weight="1"
+                            android:clickable="true"
+                            android:foreground="@drawable/card_ripple"
+                            tools:background="@color/colorPrimary"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/medium_spacing"
+                            android:layout_weight="1"
+                            android:ellipsize="end"
+                            android:lines="1"
+                            android:text="@string/primary_color"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/medium_spacing"
+                            android:layout_weight="1"
+                            android:ellipsize="end"
+                            android:lines="1"
+                            android:text="@string/accent_color"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/medium_spacing"
+                            android:layout_weight="1"
+                            android:ellipsize="end"
+                            android:lines="1"
+                            android:text="@string/chevron_color"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/medium_spacing"
+                            android:layout_weight="1"
+                            android:ellipsize="end"
+                            android:lines="1"
+                            android:text="@string/background_color"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/medium_spacing"
+                            android:layout_weight="1"
+                            android:ellipsize="end"
+                            android:lines="1"
+                            android:text="@string/window_color"/>
+
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/btn_edit_center_text"
+                        style="@style/accent_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/medium_spacing"
+                        android:text="@string/edit_center_text"/>
+
+                </LinearLayout>
+            </ScrollView>
+        </RelativeLayout>
+    </android.support.design.widget.CoordinatorLayout>
+
+    <include layout="@layout/drawer"/>
+</android.support.v4.widget.DrawerLayout>

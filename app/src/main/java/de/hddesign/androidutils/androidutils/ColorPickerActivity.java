@@ -11,20 +11,19 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import butterknife.Bind;
 import butterknife.OnClick;
-import de.hddesign.androidutils.androidutils.base.BaseActivity;
+import de.hddesign.androidutils.androidutils.base.DrawerActivity;
 import de.hddesign.androidutils.androidutils.custom.ColorView;
 import de.hddesign.androidutils.androidutils.custom.ColorView.ColorViewCallback;
 import de.hddesign.androidutils.androidutils.utils.LableSliderSeekBarChangeListener;
 import de.hddesign.androidutils.androidutils.utils.LableSliderSeekBarChangeListener.SeekbarCallback;
 
-public class ColorPickerActivity extends BaseActivity implements SeekbarCallback, ColorViewCallback {
+public class ColorPickerActivity extends DrawerActivity implements SeekbarCallback, ColorViewCallback {
 
     public static final String PICKED_COLOR = "pickedColor";
     public static final String INDEX = "index";
@@ -74,16 +73,14 @@ public class ColorPickerActivity extends BaseActivity implements SeekbarCallback
     @Bind(R.id.main_content)
     CoordinatorLayout mainContent;
 
-    @Bind(R.id.fragment_container)
-    ScrollView fragmentContainer;
-
     @Bind(R.id.hex_view)
     TextView hexView;
 
     @Bind(R.id.sliders)
-    LinearLayout sliders;
+    ScrollView sliders;
 
     private MenuItem showSlider;
+    private float[] hsv;
 
     @OnClick(R.id.iv_decrease_h)
     public void decreaseH() {
@@ -176,7 +173,7 @@ public class ColorPickerActivity extends BaseActivity implements SeekbarCallback
 
         initSeekbars();
 
-        float hsv[] = new float[3];
+        hsv = new float[3];
 
         Color.colorToHSV(color, hsv);
         colorview.setColor(hsv);
@@ -185,10 +182,24 @@ public class ColorPickerActivity extends BaseActivity implements SeekbarCallback
     }
 
     @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+
+        if (index == -1) {
+            btnOk.setVisibility(View.GONE);
+            Color.RGBToHSV(0, 0, 0, hsv);
+            colorview.setColor(hsv);
+        } else {
+            hideDrawer();
+        }
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.color_picker_menu, menu);
         showSlider = menu.findItem(R.id.show_slider);
+
         changeColors();
         return true;
     }
@@ -299,10 +310,11 @@ public class ColorPickerActivity extends BaseActivity implements SeekbarCallback
     }
 
     private void changeColors() {
-        btnOk.setBackgroundColor(colorview.getCurrentColorAsInt());
+        btnOk.getBackground().setTint(colorview.getCurrentColorAsInt());
         toolbar.setBackgroundColor(colorview.getCurrentColorAsInt());
         getWindow().setNavigationBarColor(colorview.getCurrentColorAsInt());
         mainContent.setStatusBarBackgroundColor(colorview.getCurrentColorAsInt());
+
 
         if (colorview.getHsv()[2] < 0.3f) {
             btnOk.setTextColor(Color.WHITE);
@@ -310,25 +322,34 @@ public class ColorPickerActivity extends BaseActivity implements SeekbarCallback
             toolbar.setTitleTextColor(Color.WHITE);
             if (showSlider != null)
                 showSlider.getIcon().setColorFilter(new PorterDuffColorFilter(Color.WHITE, Mode.SRC_IN));
+            if (toolbar.getNavigationIcon() != null)
+                toolbar.getNavigationIcon().setColorFilter(new PorterDuffColorFilter(Color.WHITE, Mode.SRC_IN));
         } else if (colorview.getHsv()[1] < 0.3f) {
             btnOk.setTextColor(Color.BLACK);
             hexView.setTextColor(Color.BLACK);
             toolbar.setTitleTextColor(Color.BLACK);
             if (showSlider != null)
                 showSlider.getIcon().setColorFilter(new PorterDuffColorFilter(Color.BLACK, Mode.SRC_IN));
+            if (toolbar.getNavigationIcon() != null)
+                toolbar.getNavigationIcon().setColorFilter(new PorterDuffColorFilter(Color.BLACK, Mode.SRC_IN));
         } else if (colorview.getHsv()[0] > 45 && colorview.getHsv()[0] < 200) {
             btnOk.setTextColor(Color.BLACK);
             hexView.setTextColor(Color.BLACK);
             toolbar.setTitleTextColor(Color.BLACK);
             if (showSlider != null)
                 showSlider.getIcon().setColorFilter(new PorterDuffColorFilter(Color.BLACK, Mode.SRC_IN));
+            if (toolbar.getNavigationIcon() != null)
+                toolbar.getNavigationIcon().setColorFilter(new PorterDuffColorFilter(Color.BLACK, Mode.SRC_IN));
         } else {
             btnOk.setTextColor(Color.WHITE);
             hexView.setTextColor(Color.WHITE);
             toolbar.setTitleTextColor(Color.WHITE);
             if (showSlider != null)
                 showSlider.getIcon().setColorFilter(new PorterDuffColorFilter(Color.WHITE, Mode.SRC_IN));
+            if (toolbar.getNavigationIcon() != null)
+                toolbar.getNavigationIcon().setColorFilter(new PorterDuffColorFilter(Color.WHITE, Mode.SRC_IN));
         }
+
 
         hexView.setText(colorview.getCurrentColorAsHEX());
         hexView.setBackgroundColor(colorview.getCurrentColorAsInt());
@@ -353,5 +374,10 @@ public class ColorPickerActivity extends BaseActivity implements SeekbarCallback
         seekbarH.setProgress(((int) hue));
         seekbarS.setProgress(((int) saturation));
         seekbarV.setProgress(((int) value));
+    }
+
+    @Override
+    protected int getNavItemId() {
+        return R.id.nav_colorpicker;
     }
 }

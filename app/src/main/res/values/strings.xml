@@ -18,4 +18,22 @@
     <string name="change">Ändern</string>
     <string name="show_slider">Slider anzeigen</string>
 
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="recycler_view_title">RecyclerView</string>
+    <string name="dpad">Directional-Pad</string>
+    <string name="primary_color">Haupt</string>
+    <string name="accent_color">Schmuck</string>
+    <string name="chevron_color">Pfeil</string>
+    <string name="background_color">Hintergrund</string>
+    <string name="window_color">Fenster</string>
+
+    <string name="lbl_center_button_size">Center Button Größe: %d</string>
+    <string name="lbl_padding_size">Padding Größe: %d</string>
+    <string name="lbl_chevron_size">Chevron Größe: %d</string>
+    <string name="lbl_chevron_stroke">Chevron Breite: %d</string>
+    <string name="lbl_chevron_padding">Chevron Padding: %d</string>
+    <string name="lbl_text_size">Text Größe: %d</string>
+    <string name="edit_center_text">Text bearbeiten</string>
+
 </resources>

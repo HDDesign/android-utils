@@ -14,13 +14,13 @@ import butterknife.OnClick;
 import de.hddesign.androidutils.androidutils.adapter.MainAdapter;
 import de.hddesign.androidutils.androidutils.adapter.MainAdapter.ItemClickListener;
 import de.hddesign.androidutils.androidutils.adapter.MainAdapter.ItemViewHolder;
-import de.hddesign.androidutils.androidutils.base.BaseActivity;
+import de.hddesign.androidutils.androidutils.base.DrawerActivity;
 import de.hddesign.androidutils.androidutils.model.MainItem;
 import de.hddesign.androidutils.androidutils.utils.Preferences;
 import de.hddesign.androidutils.androidutils.utils.TextInputLayoutDialog;
 import de.hddesign.androidutils.androidutils.utils.TextInputLayoutErrorHelper.TilErrorType;
 
-public class MainActivity extends BaseActivity implements ItemClickListener {
+public class RecyclerActivity extends DrawerActivity implements ItemClickListener {
 
     private MainAdapter mainAdapter;
     private ItemTouchHelper itemTouchHelper;
@@ -59,13 +59,13 @@ public class MainActivity extends BaseActivity implements ItemClickListener {
     }
 
     public static Intent newIntent() {
-        return newIntent(MainActivity.class);
+        return newIntent(RecyclerActivity.class);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_recycler);
 
         showTitle(R.string.app_name);
 
@@ -191,5 +191,10 @@ public class MainActivity extends BaseActivity implements ItemClickListener {
             }
         });
         tilDialog.show();
+    }
+
+    @Override
+    protected int getNavItemId() {
+        return R.id.nav_recycler_view;
     }
 }

@@ -8,19 +8,19 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AndroidUtilTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".RecyclerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ColorPickerActivity"
             android:configChanges="orientation|screenSize"
             android:theme="@style/AndroidUtilTheme">
-
+        </activity>
+        <activity android:name=".DPadActivity">
         </activity>
     </application>
 

@@ -11,4 +11,6 @@
     <color name="green">#00FF00</color>
     <color name="blue">#0000FF</color>
     <color name="darkText">#6f6f6f</color>
+
+    <color name="drawerBackground">#FFFFFF</color>
 </resources>

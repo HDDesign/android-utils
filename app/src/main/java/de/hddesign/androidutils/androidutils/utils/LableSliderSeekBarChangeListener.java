@@ -8,6 +8,7 @@ public class LableSliderSeekBarChangeListener implements SeekBar.OnSeekBarChange
 
     public interface SeekbarCallback {
         void onProgressChanged(long id, int value, boolean fromUser);
+
         void onStopTrackingTouch(long id, int value);
     }
 
@@ -15,6 +16,7 @@ public class LableSliderSeekBarChangeListener implements SeekBar.OnSeekBarChange
     private TextView label;
     private int resourceId;
     private long id;
+    private int offset;
 
     private SeekbarCallback seekbarCallback;
 
@@ -23,20 +25,26 @@ public class LableSliderSeekBarChangeListener implements SeekBar.OnSeekBarChange
     }
 
     public LableSliderSeekBarChangeListener(Context context, TextView label, int resourceId, int initValue, long id) {
+        this(context, label, resourceId, initValue, id, 0);
+    }
+
+    public LableSliderSeekBarChangeListener(Context context, TextView label, int resourceId, int initValue, long id, int offset) {
         this.context = context;
         this.label = label;
         this.resourceId = resourceId;
         this.id = id;
+        this.offset = offset;
 
-        label.setText(String.format(context.getString(resourceId), initValue));
+        label.setText(String.format(context.getString(resourceId), initValue + offset));
     }
 
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-        label.setText(String.format(context.getString(resourceId), progress));
+        if (label != null)
+            label.setText(String.format(context.getString(resourceId), progress + offset));
 
-        if(seekbarCallback != null)
-            seekbarCallback.onProgressChanged(id, progress, fromUser);
+        if (seekbarCallback != null)
+            seekbarCallback.onProgressChanged(id, progress + offset, fromUser);
     }
 
     @Override
@@ -46,8 +54,9 @@ public class LableSliderSeekBarChangeListener implements SeekBar.OnSeekBarChange
 
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
-        label.setText(String.format(context.getString(resourceId), seekBar.getProgress()));
-        if(seekbarCallback != null)
-            seekbarCallback.onStopTrackingTouch(id, seekBar.getProgress());
+        if (label != null)
+            label.setText(String.format(context.getString(resourceId), (seekBar.getProgress() + offset)));
+        if (seekbarCallback != null)
+            seekbarCallback.onStopTrackingTouch(id, (seekBar.getProgress() + offset));
     }
 }

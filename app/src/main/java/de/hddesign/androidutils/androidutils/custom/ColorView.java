@@ -60,8 +60,8 @@ public class ColorView extends View {
         TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.ColorView, 0, 0);
 
         try {
-            size = a.getDimension(R.styleable.ColorView_size, -1);
-            hueCircleStrokeWidth = a.getDimension(R.styleable.ColorView_hueCircleStrokeWidth, 40);
+            size = a.getDimension(R.styleable.CommonValues_size, 0);
+            hueCircleStrokeWidth = a.getDimension(R.styleable.ColorView_hueCircleStrokeWidth, 0);
             indicatorRadius = a.getDimension(R.styleable.ColorView_indicatorRadius, 20);
         } finally {
             a.recycle();
@@ -69,13 +69,19 @@ public class ColorView extends View {
 
         hsv = new float[]{0, 0, 0};
 
-        initView();
-
         this.addOnLayoutChangeListener(new OnLayoutChangeListener() {
             @Override
             public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
                 if (!initialized) {
-                    size = getWidth();
+                    if (getWidth() <= 0)
+                        return;
+
+                    if (size <= 0)
+                        size = getWidth();
+
+                    if (hueCircleStrokeWidth == 0)
+                        hueCircleStrokeWidth = size / 8;
+
                     initView();
                     initialized = true;
                 }
@@ -134,11 +140,11 @@ public class ColorView extends View {
             return;
 
         drawHueCircle(canvas);
-        canvas.rotate(hsv[0], canvas.getWidth() / 2, canvas.getHeight() / 2);
+        canvas.rotate(hsv[0], size / 2, size / 2);
         drawSelectionTriangle(canvas);
         drawCurrentHueIndicator(canvas);
         drawIndicatorCircle(canvas);
-        canvas.rotate(360 - hsv[0], canvas.getWidth() / 2, canvas.getHeight() / 2);
+        canvas.rotate(360 - hsv[0], size / 2, size / 2);
     }
 
     private void drawHueCircle(Canvas canvas) {
@@ -152,9 +158,9 @@ public class ColorView extends View {
     }
 
     private void drawCurrentHueIndicator(Canvas canvas) {
-        canvas.rotate(90, canvas.getWidth() / 2, canvas.getHeight() / 2);
+        canvas.rotate(90, size / 2, size / 2);
         canvas.drawLine(size / 2, 0, size / 2, 0 + hueCircleStrokeWidth, hueIndicatorPaint);
-        canvas.rotate(-90, canvas.getWidth() / 2, canvas.getHeight() / 2);
+        canvas.rotate(-90, size / 2, size / 2);
     }
 
     private void drawIndicatorCircle(Canvas canvas) {
@@ -325,10 +331,7 @@ public class ColorView extends View {
         if (widthMode == MeasureSpec.EXACTLY) {
             width = widthSize;
         } else if (widthMode == MeasureSpec.AT_MOST) {
-            if (desiredWidth != 0)
-                width = Math.min(desiredWidth, widthSize);
-            else
-                width = heightSize;
+            width = Math.min(desiredWidth, widthSize);
         } else {
             width = desiredWidth;
         }
@@ -336,13 +339,14 @@ public class ColorView extends View {
         if (heightMode == MeasureSpec.EXACTLY) {
             height = heightSize;
         } else if (heightMode == MeasureSpec.AT_MOST) {
-            if (desiredHeight != 0)
-                height = Math.min(desiredHeight, heightSize);
-            else
-                height = width;
+            height = Math.min(desiredHeight, heightSize);
+        } else if (heightMode == MeasureSpec.UNSPECIFIED) {
+            height = width;
         } else {
             height = desiredHeight;
         }
+
+        size = Math.min(width, height);
 
         setMeasuredDimension(width, height);
     }
@@ -521,6 +525,7 @@ public class ColorView extends View {
                 boolean pointIsInTriangle = (isPointInTriangle(eventP, A, B, C));
 
                 if ((pointIsInTriangle || triangleInteraction) && !hueWheelInteraction) {
+                    getParent().requestDisallowInterceptTouchEvent(true);
                     triangleInteraction = true;
                     hueWheelInteraction = false;
 
@@ -575,6 +580,7 @@ public class ColorView extends View {
                     colorView.invalidate();
                     return true;
                 } else if ((isPointOnHueWheel(eventP) || hueWheelInteraction) && !triangleInteraction) {
+                    getParent().requestDisallowInterceptTouchEvent(true);
                     hueWheelInteraction = true;
                     triangleInteraction = false;
 

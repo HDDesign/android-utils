@@ -16,8 +16,11 @@
     <dimen name="xxlarge_text">32sp</dimen>
 
     <dimen name="drawer_width">304dp</dimen>
-    <dimen name="drawer_header_height_small">130dp</dimen>
+    <dimen name="drawer_header_height_small">200dp</dimen>
 
     <dimen name="button_corner_radius">2dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
 </resources>

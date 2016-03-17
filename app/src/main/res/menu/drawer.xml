@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_recycler_view"
+            android:icon="@drawable/ic_list"
+            android:orderInCategory="0"
+            android:title="@string/recycler_view_title"/>
+
+        <item
+            android:id="@+id/nav_colorpicker"
+            android:icon="@drawable/ic_slider"
+            android:orderInCategory="1"
+            android:title="@string/colorpicker"/>
+
+        <item
+            android:id="@+id/nav_dpad"
+            android:icon="@drawable/ic_dpad"
+            android:orderInCategory="1"
+            android:title="@string/dpad"/>
+    </group>
+</menu>

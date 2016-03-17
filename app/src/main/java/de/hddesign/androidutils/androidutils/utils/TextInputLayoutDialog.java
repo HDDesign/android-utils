@@ -27,6 +27,8 @@ public class TextInputLayoutDialog extends AlertDialog {
         til = (TextInputLayout) v.findViewById(R.id.til);
         input = (TextInputEditText) v.findViewById(R.id.et);
 
+        input.setSingleLine(true);
+
         this.setView(v);
 
         this.context = context;
@@ -47,6 +49,10 @@ public class TextInputLayoutDialog extends AlertDialog {
                 }
             }
         });
+    }
+
+    public void setMultiline() {
+        input.setSingleLine(false);
     }
 
     public void setInputText(String string) {
