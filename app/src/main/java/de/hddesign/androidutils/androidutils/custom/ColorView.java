@@ -67,6 +67,8 @@ public class ColorView extends View {
             a.recycle();
         }
 
+        hsv = new float[]{0, 0, 0};
+
         initView();
 
         this.addOnLayoutChangeListener(new OnLayoutChangeListener() {
@@ -85,8 +87,6 @@ public class ColorView extends View {
     }
 
     private void initView() {
-        hsv = new float[]{0, 0, 0};
-
         hueCirclePaint = new Paint();
         hueCirclePaint.setStyle(Style.STROKE);
         hueCirclePaint.setAntiAlias(true);
@@ -441,8 +441,19 @@ public class ColorView extends View {
         this.colorViewCallback = colorViewCallback;
     }
 
-    public int getCurrentColor() {
+    public int getCurrentColorAsInt() {
         return Color.HSVToColor(hsv);
+    }
+
+    public String getCurrentColorAsHEX() {
+        calcRGBfromCurrentHSV();
+        String redHex = Integer.toHexString(((int) red));
+        String greenHex = Integer.toHexString(((int) green));
+        ;
+        String blueHex = Integer.toHexString(((int) blue));
+        ;
+
+        return "#" + redHex + greenHex + blueHex;
     }
 
     public void setHSV(int hue, int saturation, int value) {
@@ -485,6 +496,10 @@ public class ColorView extends View {
         this.hsv = hsv;
         this.invalidate();
     }
+
+    /***********************************************/
+    /*************** TOUCH LISTENER ****************/
+    /***********************************************/
 
     public ColorViewTouchListener getColorViewTouchListener() {
         return colorViewTouchListener;

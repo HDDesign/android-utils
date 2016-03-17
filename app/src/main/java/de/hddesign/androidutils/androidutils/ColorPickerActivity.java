@@ -2,11 +2,16 @@ package de.hddesign.androidutils.androidutils;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.PorterDuff.Mode;
+import android.graphics.PorterDuffColorFilter;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -66,14 +71,19 @@ public class ColorPickerActivity extends BaseActivity implements SeekbarCallback
     @Bind(R.id.btn_ok)
     Button btnOk;
 
-    @Bind(R.id.app_bar_layout)
-    AppBarLayout appBarLayout;
-
     @Bind(R.id.main_content)
     CoordinatorLayout mainContent;
 
     @Bind(R.id.fragment_container)
     ScrollView fragmentContainer;
+
+    @Bind(R.id.hex_view)
+    TextView hexView;
+
+    @Bind(R.id.sliders)
+    LinearLayout sliders;
+
+    private MenuItem showSlider;
 
     @OnClick(R.id.iv_decrease_h)
     public void decreaseH() {
@@ -138,7 +148,7 @@ public class ColorPickerActivity extends BaseActivity implements SeekbarCallback
     @OnClick(R.id.btn_ok)
     public void onOkayClicked() {
         Intent data = new Intent();
-        data.putExtra(PICKED_COLOR, colorview.getCurrentColor());
+        data.putExtra(PICKED_COLOR, colorview.getCurrentColorAsInt());
         data.putExtra(INDEX, index);
         setResult(RESULT_OK, data);
         this.finish();
@@ -166,19 +176,32 @@ public class ColorPickerActivity extends BaseActivity implements SeekbarCallback
 
         initSeekbars();
 
-        colorview.setColorViewCallback(this);
-
-        fragmentContainer.setOnTouchListener(colorview.getColorViewTouchListener());
-    }
-
-    @Override
-    public void onPostCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onPostCreate(savedInstanceState, persistentState);
-
         float hsv[] = new float[3];
 
         Color.colorToHSV(color, hsv);
         colorview.setColor(hsv);
+
+        colorview.setColorViewCallback(this);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.color_picker_menu, menu);
+        showSlider = menu.findItem(R.id.show_slider);
+        changeColors();
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.show_slider:
+                showSlider();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private void initSeekbars() {
@@ -276,21 +299,46 @@ public class ColorPickerActivity extends BaseActivity implements SeekbarCallback
     }
 
     private void changeColors() {
-        btnOk.setBackgroundColor(colorview.getCurrentColor());
-        toolbar.setBackgroundColor(colorview.getCurrentColor());
-        getWindow().setNavigationBarColor(colorview.getCurrentColor());
-        mainContent.setStatusBarBackgroundColor(colorview.getCurrentColor());
+        btnOk.setBackgroundColor(colorview.getCurrentColorAsInt());
+        toolbar.setBackgroundColor(colorview.getCurrentColorAsInt());
+        getWindow().setNavigationBarColor(colorview.getCurrentColorAsInt());
+        mainContent.setStatusBarBackgroundColor(colorview.getCurrentColorAsInt());
 
         if (colorview.getHsv()[2] < 0.3f) {
             btnOk.setTextColor(Color.WHITE);
+            hexView.setTextColor(Color.WHITE);
             toolbar.setTitleTextColor(Color.WHITE);
+            if (showSlider != null)
+                showSlider.getIcon().setColorFilter(new PorterDuffColorFilter(Color.WHITE, Mode.SRC_IN));
         } else if (colorview.getHsv()[1] < 0.3f) {
             btnOk.setTextColor(Color.BLACK);
+            hexView.setTextColor(Color.BLACK);
             toolbar.setTitleTextColor(Color.BLACK);
+            if (showSlider != null)
+                showSlider.getIcon().setColorFilter(new PorterDuffColorFilter(Color.BLACK, Mode.SRC_IN));
+        } else if (colorview.getHsv()[0] > 45 && colorview.getHsv()[0] < 200) {
+            btnOk.setTextColor(Color.BLACK);
+            hexView.setTextColor(Color.BLACK);
+            toolbar.setTitleTextColor(Color.BLACK);
+            if (showSlider != null)
+                showSlider.getIcon().setColorFilter(new PorterDuffColorFilter(Color.BLACK, Mode.SRC_IN));
         } else {
             btnOk.setTextColor(Color.WHITE);
+            hexView.setTextColor(Color.WHITE);
             toolbar.setTitleTextColor(Color.WHITE);
+            if (showSlider != null)
+                showSlider.getIcon().setColorFilter(new PorterDuffColorFilter(Color.WHITE, Mode.SRC_IN));
         }
+
+        hexView.setText(colorview.getCurrentColorAsHEX());
+        hexView.setBackgroundColor(colorview.getCurrentColorAsInt());
+    }
+
+    private void showSlider() {
+        if (sliders.getVisibility() == View.GONE)
+            sliders.setVisibility(View.VISIBLE);
+        else
+            sliders.setVisibility(View.GONE);
     }
 
     @Override

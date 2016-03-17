@@ -4,6 +4,7 @@
     android:id="@+id/main_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
@@ -40,27 +41,46 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <de.hddesign.androidutils.androidutils.custom.ColorView
-                    android:id="@+id/colorView"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="@dimen/xlarge_spacing"
-                    app:hueCircleStrokeWidth="50dp"/>
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/hex_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:padding="@dimen/medium_spacing"
+                        android:layout_margin="@dimen/large_spacing"
+                        android:textSize="@dimen/headline_text"
+                        tools:text="#FF0000"/>
+
+                    <de.hddesign.androidutils.androidutils.custom.ColorView
+                        android:id="@+id/colorView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/xlarge_spacing"
+                        app:hueCircleStrokeWidth="50dp"
+                        tools:visibility="gone"/>
+
+                </RelativeLayout>
 
                 <Button
                     android:id="@+id/btn_ok"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/ok"
+                    android:layout_margin="@dimen/xlarge_spacing"
                     android:padding="@dimen/large_spacing"
-                    android:layout_margin="@dimen/xlarge_spacing"/>
+                    android:text="@string/ok"/>
 
                 <LinearLayout
+                    android:id="@+id/sliders"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:gravity="center"
+                    android:orientation="vertical"
                     android:visibility="gone">
 
                     <TextView

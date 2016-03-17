@@ -1,11 +1,15 @@
 package de.hddesign.androidutils.androidutils.adapter;
 
+import android.graphics.Color;
+import android.graphics.PorterDuff.Mode;
+import android.graphics.PorterDuffColorFilter;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -79,6 +83,8 @@ public class MainAdapter extends RecyclerView.Adapter<BaseViewHolder<MainItem>> 
         void itemSelected(MainItem item, int position);
 
         void onStartItemDrag(ItemViewHolder holder);
+
+        void itemLongClicked(MainItem item, int adapterPosition);
     }
 
     public int updateItem(MainItem item) {
@@ -143,6 +149,16 @@ public class MainAdapter extends RecyclerView.Adapter<BaseViewHolder<MainItem>> 
                     }
                 }
             });
+
+            itemView.setOnLongClickListener(new OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    if (itemClickListener != null) {
+                        itemClickListener.itemLongClicked(item, getAdapterPosition());
+                    }
+                    return true;
+                }
+            });
         }
 
         @Override
@@ -153,6 +169,27 @@ public class MainAdapter extends RecyclerView.Adapter<BaseViewHolder<MainItem>> 
             txtTitle.setText(item.getTitle());
 
             ((CardView) itemView).setCardBackgroundColor(item.getColor());
+
+            float hsv[] = new float[3];
+            Color.colorToHSV(item.getColor(), hsv);
+
+            if (hsv[2] < 0.3f) {
+                txtPos.setTextColor(Color.WHITE);
+                txtTitle.setTextColor(Color.WHITE);
+                reorderItem.setColorFilter(new PorterDuffColorFilter(Color.WHITE, Mode.SRC_IN));
+            } else if (hsv[1] < 0.3f) {
+                txtPos.setTextColor(Color.BLACK);
+                txtTitle.setTextColor(Color.BLACK);
+                reorderItem.setColorFilter(new PorterDuffColorFilter(Color.BLACK, Mode.SRC_IN));
+            } else if (hsv[0] > 45 && hsv[0] < 200) {
+                txtPos.setTextColor(Color.BLACK);
+                txtTitle.setTextColor(Color.BLACK);
+                reorderItem.setColorFilter(new PorterDuffColorFilter(Color.BLACK, Mode.SRC_IN));
+            } else {
+                txtPos.setTextColor(Color.WHITE);
+                txtTitle.setTextColor(Color.WHITE);
+                reorderItem.setColorFilter(new PorterDuffColorFilter(Color.WHITE, Mode.SRC_IN));
+            }
 
             reorderItem.setOnTouchListener(new View.OnTouchListener() {
                 @Override

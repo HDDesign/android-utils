@@ -56,7 +56,6 @@ public class MainActivity extends BaseActivity implements ItemClickListener {
             }
         });
         tilDialog.show();
-
     }
 
     public static Intent newIntent() {
@@ -118,6 +117,11 @@ public class MainActivity extends BaseActivity implements ItemClickListener {
 
                 preferences.setMainItems(mainAdapter.getItems());
             }
+
+            @Override
+            public boolean isLongPressDragEnabled() {
+                return false;
+            }
         };
 
         itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
@@ -160,5 +164,32 @@ public class MainActivity extends BaseActivity implements ItemClickListener {
     @Override
     public void onStartItemDrag(ItemViewHolder holder) {
         itemTouchHelper.startDrag(holder);
+    }
+
+    @Override
+    public void itemLongClicked(final MainItem item, final int adapterPosition) {
+        final TextInputLayoutDialog tilDialog = new TextInputLayoutDialog(this, R.style.AppCompatAlertDialogStyle);
+
+        tilDialog.setTilHint(getString(R.string.item_name));
+        tilDialog.setTitle(R.string.title_mainitem_change);
+        tilDialog.setTilErrorHelper(TilErrorType.MIN_MAX_LENGTH, R.string.error_min_max_length);
+        tilDialog.getTilErrorHelper().setMinLength(3);
+        tilDialog.getTilErrorHelper().setMaxLength(15);
+        tilDialog.setInputText(item.getTitle());
+
+        tilDialog.setOnPositiveButtonClickedListener(R.string.change, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!tilDialog.getTilErrorHelper().hasError()) {
+                    String name = tilDialog.getInputText();
+                    item.setTitle(name);
+                    mainAdapter.updateItem(item);
+                    mainAdapter.notifyItemChanged(adapterPosition);
+                    preferences.setMainItems(mainAdapter.getItems());
+                    tilDialog.dismiss();
+                }
+            }
+        });
+        tilDialog.show();
     }
 }
