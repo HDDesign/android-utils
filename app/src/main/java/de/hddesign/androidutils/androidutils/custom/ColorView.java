@@ -464,8 +464,8 @@ public class ColorView extends View {
         String blueHex = hex.substring(4, 6);
 
         red = Integer.parseInt(redHex, 16);
-        blue = Integer.parseInt(greenHex, 16);
-        green = Integer.parseInt(blueHex, 16);
+        green = Integer.parseInt(greenHex, 16);
+        blue = Integer.parseInt(blueHex, 16);
 
         calcCurrentHSV();
         this.invalidate();

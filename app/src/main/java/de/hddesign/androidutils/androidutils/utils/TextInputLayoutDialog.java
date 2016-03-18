@@ -10,7 +10,6 @@ import android.text.InputFilter;
 import android.text.InputType;
 import android.text.Spanned;
 import android.text.method.DigitsKeyListener;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 
@@ -68,14 +67,14 @@ public class TextInputLayoutDialog extends AlertDialog {
         input.setKeyListener(DigitsKeyListener.getInstance(chars));
 
         if (showNormalKeyboard) {
-            setInputType(InputType.TYPE_CLASS_TEXT);
+            setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
 
             InputFilter filter = new InputFilter() {
                 public CharSequence filter(CharSequence source, int start, int end,
                                            Spanned dest, int dstart, int dend) {
                     for (int i = start; i < end; i++) {
                         if (!charAllowed(chars, source.charAt(i))) {
-                            return "";
+                            return source.subSequence(0, i);
                         }
                     }
                     return null;
@@ -86,7 +85,6 @@ public class TextInputLayoutDialog extends AlertDialog {
     }
 
     private boolean charAllowed(String chars, Character c) {
-        Log.d("TextInputLayoutDialog", String.format("charAllowed: %s", chars.contains(c.toString())));
         return chars.contains(c.toString());
     }
 
