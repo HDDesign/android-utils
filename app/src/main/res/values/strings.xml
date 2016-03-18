@@ -1,3 +1,57 @@
 <resources>
     <string name="app_name">AndroidUtils</string>
+    <string name="cancel">Abbrechen</string>
+    <string name="lbl_position">%d.</string>
+    <string name="lbl_r">Rot: %d</string>
+    <string name="lbl_g">Grün: %d</string>
+    <string name="lbl_b">Blau: %d</string>
+    <string name="colorpicker">Farbauswahl</string>
+    <string name="lbl_h">Farbwert: %d</string>
+    <string name="lbl_s">Sättigung: %d</string>
+    <string name="lbl_v">Dunkelstufe: %d</string>
+    <string name="ok">Übernehmen</string>
+    <string name="item_name">Name</string>
+    <string name="title_mainitem_create">Neuer Eintrag</string>
+    <string name="error_min_max_length">Zwischen %1$d und %2$d Zeichen erforderlich</string>
+    <string name="create">Erstellen</string>
+    <string name="title_mainitem_change">Eintrag ändern</string>
+    <string name="change">Ändern</string>
+    <string name="show_slider">Slider anzeigen</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="recycler_view_title">RecyclerView</string>
+    <string name="dpad">Directional-Pad</string>
+    <string name="primary_color">Haupt</string>
+    <string name="accent_color">Schmuck</string>
+    <string name="chevron_color">Pfeil</string>
+    <string name="background_color">Hintergrund</string>
+    <string name="window_color">Fenster</string>
+
+    <string name="lbl_center_button_size">Center Button Größe: %d</string>
+    <string name="lbl_padding_size">Padding Größe: %d</string>
+    <string name="lbl_chevron_size">Chevron Größe: %d</string>
+    <string name="lbl_chevron_stroke">Chevron Breite: %d</string>
+    <string name="lbl_chevron_padding">Chevron Padding: %d</string>
+    <string name="lbl_text_size">Text Größe: %d</string>
+    <string name="edit_center_text">Text bearbeiten</string>
+    <string name="multiline">Mehrzeilig</string>
+    <string name="open_dialog">Dialog öffnen</string>
+    <string name="prefil_input">Eingabefeld Inhalt</string>
+    <string name="min_input">Minimum Zeichen</string>
+    <string name="max_input">Maximum Zeichen</string>
+    <string name="dialogs">Dialoge</string>
+    <string name="error_min_enabled">Min. Prüfung</string>
+    <string name="error_max_enabled">Max. Prüfung</string>
+    <string name="error_min_length">Mindestens %d Zeichen erforderlich</string>
+    <string name="error_max_length">Maximal %d Zeichen möglich</string>
+    <string name="title">Überschrift</string>
+    <string name="hint">Hinweis</string>
+    <string name="open_progressdialog">Fortschrittsdialog öffnen</string>
+    <string name="ruler">Lineale</string>
+    <string name="use_imperial_units">inch</string>
+    <string name="text">Text</string>
+    <string name="marks">Markierungen</string>
+    <string name="info_text">android-utils v%1$s\nDevice: %2$s %3$s %4$s\nOS: android %5$s\nForm: %6$s\nAvailable Memory: %7$s/%8$s MB</string>
+    <string name="info">Info</string>
 </resources>
