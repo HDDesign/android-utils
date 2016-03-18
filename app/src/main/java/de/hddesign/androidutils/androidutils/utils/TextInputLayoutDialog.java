@@ -6,6 +6,11 @@ import android.support.annotation.StringRes;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
+import android.text.InputFilter;
+import android.text.InputType;
+import android.text.Spanned;
+import android.text.method.DigitsKeyListener;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 
@@ -55,6 +60,36 @@ public class TextInputLayoutDialog extends AlertDialog {
         input.setSingleLine(!multiline);
     }
 
+    public void setInputType(int inputType) {
+        input.setInputType(inputType);
+    }
+
+    public void setDigits(final String chars, boolean showNormalKeyboard) {
+        input.setKeyListener(DigitsKeyListener.getInstance(chars));
+
+        if (showNormalKeyboard) {
+            setInputType(InputType.TYPE_CLASS_TEXT);
+
+            InputFilter filter = new InputFilter() {
+                public CharSequence filter(CharSequence source, int start, int end,
+                                           Spanned dest, int dstart, int dend) {
+                    for (int i = start; i < end; i++) {
+                        if (!charAllowed(chars, source.charAt(i))) {
+                            return "";
+                        }
+                    }
+                    return null;
+                }
+            };
+            input.setFilters(new InputFilter[]{filter});
+        }
+    }
+
+    private boolean charAllowed(String chars, Character c) {
+        Log.d("TextInputLayoutDialog", String.format("charAllowed: %s", chars.contains(c.toString())));
+        return chars.contains(c.toString());
+    }
+
     public void setInputText(String string) {
         input.setText(string);
     }
@@ -64,6 +99,10 @@ public class TextInputLayoutDialog extends AlertDialog {
             return input.getText().toString();
         else
             return "";
+    }
+
+    public void setTilHint(@StringRes int hintRes) {
+        til.setHint(context.getString(hintRes));
     }
 
     public void setTilHint(String string) {

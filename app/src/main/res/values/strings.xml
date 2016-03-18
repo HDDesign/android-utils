@@ -54,4 +54,7 @@
     <string name="marks">Markierungen</string>
     <string name="info_text">android-utils v%1$s\nDevice: %2$s %3$s %4$s\nOS: android %5$s\nForm: %6$s\nAvailable Memory: %7$s/%8$s MB</string>
     <string name="info">Info</string>
+    <string name="hex_color">Hex-Farbe</string>
+    <string name="hint_hex_color">Farbe als Hexcode</string>
+    <string name="error_hex">Farbe muss mit 6 Zeichen definiert werden</string>
 </resources>
