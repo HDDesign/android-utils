@@ -13,6 +13,7 @@ import butterknife.Bind;
 import de.hddesign.androidutils.androidutils.ColorPickerActivity;
 import de.hddesign.androidutils.androidutils.DPadActivity;
 import de.hddesign.androidutils.androidutils.DialogActivity;
+import de.hddesign.androidutils.androidutils.InfoActivity;
 import de.hddesign.androidutils.androidutils.R;
 import de.hddesign.androidutils.androidutils.RecyclerActivity;
 import de.hddesign.androidutils.androidutils.RulerActivity;
@@ -129,6 +130,9 @@ public class DrawerActivity extends BaseActivity implements FragmentManager.OnBa
                     break;
                 case R.id.nav_ruler:
                     startActivity(RulerActivity.newIntent());
+                    break;
+                case R.id.nav_info:
+                    startActivity(InfoActivity.newIntent());
                     break;
             }
         }

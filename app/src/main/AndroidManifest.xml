@@ -45,6 +45,11 @@
             android:theme="@style/AndroidUtilTheme">
         </activity>
 
+        <activity
+            android:name=".InfoActivity"
+            android:theme="@style/AndroidUtilTheme">
+        </activity>
+
     </application>
 
 </manifest>

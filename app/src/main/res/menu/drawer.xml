@@ -27,8 +27,14 @@
 
         <item
             android:id="@+id/nav_ruler"
-            android:icon="@drawable/ic_linear_scale_black_36dp"
+            android:icon="@drawable/ic_linear_scale"
             android:orderInCategory="1"
             android:title="@string/ruler"/>
+
+        <item
+            android:id="@+id/nav_info"
+            android:icon="@drawable/ic_info_outline"
+            android:orderInCategory="1"
+            android:title="@string/info"/>
     </group>
 </menu>
