@@ -22,6 +22,8 @@ import de.hddesign.androidutils.androidutils.custom.ColorView;
 import de.hddesign.androidutils.androidutils.custom.ColorView.ColorViewCallback;
 import de.hddesign.androidutils.androidutils.utils.LableSliderSeekBarChangeListener;
 import de.hddesign.androidutils.androidutils.utils.LableSliderSeekBarChangeListener.SeekbarCallback;
+import de.hddesign.androidutils.androidutils.utils.TextInputLayoutDialog;
+import de.hddesign.androidutils.androidutils.utils.TextInputLayoutErrorHelper.TilErrorType;
 
 public class ColorPickerActivity extends DrawerActivity implements SeekbarCallback, ColorViewCallback {
 
@@ -82,6 +84,40 @@ public class ColorPickerActivity extends DrawerActivity implements SeekbarCallba
     private MenuItem showSlider;
 
     private float[] hsv;
+
+    @OnClick(R.id.hex_view)
+    public void onHexViewClicked() {
+        final TextInputLayoutDialog tilDialog = new TextInputLayoutDialog(this, R.style.AppCompatAlertDialogStyle);
+
+        tilDialog.setTitle(R.string.hex_color);
+        tilDialog.setTilHint(R.string.hint_hex_color);
+
+        tilDialog.setTilErrorHelper(TilErrorType.MIN_MAX_LENGTH, R.string.error_hex);
+        tilDialog.getTilErrorHelper().setMinLength(6);
+        tilDialog.getTilErrorHelper().setMaxLength(6);
+
+        tilDialog.setDigits("abcdefABCDEF0123456789", true);
+
+        String currentColorString = colorview.getCurrentColorAsHEX();
+
+        currentColorString = currentColorString.substring(1, currentColorString.length());
+
+        tilDialog.setInputText(currentColorString);
+
+        tilDialog.setOnPositiveButtonClickedListener(R.string.ok, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!tilDialog.getTilErrorHelper().hasError()) {
+                    String hex = tilDialog.getInputText();
+                    colorview.setColorFromHex(hex);
+                    tilDialog.dismiss();
+
+                    changeColors();
+                }
+            }
+        });
+        tilDialog.show();
+    }
 
     @OnClick(R.id.iv_decrease_h)
     public void decreaseH() {

@@ -451,13 +451,24 @@ public class ColorView extends View {
 
     public String getCurrentColorAsHEX() {
         calcRGBfromCurrentHSV();
-        String redHex = Integer.toHexString(((int) red));
-        String greenHex = Integer.toHexString(((int) green));
-        ;
-        String blueHex = Integer.toHexString(((int) blue));
-        ;
+        String redHex = Integer.toHexString(0x100 | ((int) red)).substring(1);
+        String greenHex = Integer.toHexString(0x100 | ((int) green)).substring(1);
+        String blueHex = Integer.toHexString(0x100 | ((int) blue)).substring(1);
 
-        return "#" + redHex + greenHex + blueHex;
+        return "#" + redHex.toUpperCase() + greenHex.toUpperCase() + blueHex.toUpperCase();
+    }
+
+    public void setColorFromHex(String hex) {
+        String redHex = hex.substring(0, 2);
+        String greenHex = hex.substring(2, 4);
+        String blueHex = hex.substring(4, 6);
+
+        red = Integer.parseInt(redHex, 16);
+        blue = Integer.parseInt(greenHex, 16);
+        green = Integer.parseInt(blueHex, 16);
+
+        calcCurrentHSV();
+        this.invalidate();
     }
 
     public void setHSV(int hue, int saturation, int value) {
