@@ -1,6 +1,4 @@
 # android-utils
-==============
-
 compilation of useful stuff i made in former projects in a sample App
 
 Includes
