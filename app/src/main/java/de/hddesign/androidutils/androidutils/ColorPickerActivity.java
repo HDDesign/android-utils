@@ -80,6 +80,7 @@ public class ColorPickerActivity extends DrawerActivity implements SeekbarCallba
     ScrollView sliders;
 
     private MenuItem showSlider;
+
     private float[] hsv;
 
     @OnClick(R.id.iv_decrease_h)
@@ -178,6 +179,8 @@ public class ColorPickerActivity extends DrawerActivity implements SeekbarCallba
         Color.colorToHSV(color, hsv);
         colorview.setColor(hsv);
 
+        changeColors();
+
         colorview.setColorViewCallback(this);
     }
 
@@ -197,7 +200,7 @@ public class ColorPickerActivity extends DrawerActivity implements SeekbarCallba
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.color_picker_menu, menu);
+        inflater.inflate(R.menu.slider_controls_menu, menu);
         showSlider = menu.findItem(R.id.show_slider);
 
         changeColors();
@@ -310,11 +313,10 @@ public class ColorPickerActivity extends DrawerActivity implements SeekbarCallba
     }
 
     private void changeColors() {
-        btnOk.getBackground().setTint(colorview.getCurrentColorAsInt());
+        btnOk.getBackground().mutate().setTint(colorview.getCurrentColorAsInt());
         toolbar.setBackgroundColor(colorview.getCurrentColorAsInt());
         getWindow().setNavigationBarColor(colorview.getCurrentColorAsInt());
         mainContent.setStatusBarBackgroundColor(colorview.getCurrentColorAsInt());
-
 
         if (colorview.getHsv()[2] < 0.3f) {
             btnOk.setTextColor(Color.WHITE);

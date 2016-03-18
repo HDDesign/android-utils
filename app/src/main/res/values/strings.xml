@@ -35,5 +35,18 @@
     <string name="lbl_chevron_padding">Chevron Padding: %d</string>
     <string name="lbl_text_size">Text Größe: %d</string>
     <string name="edit_center_text">Text bearbeiten</string>
+    <string name="multiline">Mehrzeilig</string>
+    <string name="open_dialog">Dialog öffnen</string>
+    <string name="prefil_input">Eingabefeld Inhalt</string>
+    <string name="min_input">Minimum Zeichen</string>
+    <string name="max_input">Maximum Zeichen</string>
+    <string name="dialogs">Dialoge</string>
+    <string name="error_min_enabled">Min. Prüfung</string>
+    <string name="error_max_enabled">Max. Prüfung</string>
+    <string name="error_min_length">Mindestens %d Zeichen erforderlich</string>
+    <string name="error_max_length">Maximal %d Zeichen möglich</string>
+    <string name="title">Überschrift</string>
+    <string name="hint">Hinweis</string>
+    <string name="open_progressdialog">Fortschrittsdialog öffnen</string>
 
 </resources>

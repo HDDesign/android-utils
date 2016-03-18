@@ -192,7 +192,7 @@ public class DPadActivity extends DrawerActivity implements DPadTouchListener, S
         tilDialog.setTilErrorHelper(TilErrorType.MIN_MAX_LENGTH, R.string.error_min_max_length);
         tilDialog.getTilErrorHelper().setMinLength(3);
         tilDialog.getTilErrorHelper().setMaxLength(40);
-        tilDialog.setMultiline();
+        tilDialog.setMultiline(true);
         tilDialog.setInputText(dpad.getCenterText());
 
         tilDialog.setOnPositiveButtonClickedListener(R.string.change, new View.OnClickListener() {
@@ -226,7 +226,7 @@ public class DPadActivity extends DrawerActivity implements DPadTouchListener, S
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.color_picker_menu, menu);
+        inflater.inflate(R.menu.slider_controls_menu, menu);
         MenuItem showSlider = menu.findItem(R.id.show_slider);
         showSlider.getIcon().setColorFilter(new PorterDuffColorFilter(Color.WHITE, Mode.SRC_ATOP));
         return true;

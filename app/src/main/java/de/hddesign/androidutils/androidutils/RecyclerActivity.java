@@ -1,10 +1,11 @@
 package de.hddesign.androidutils.androidutils;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
@@ -32,6 +33,7 @@ public class RecyclerActivity extends DrawerActivity implements ItemClickListene
     FloatingActionButton fab;
 
     private Preferences preferences;
+    private GridLayoutManager gridLayoutManager;
 
     @OnClick(R.id.fab)
     public void onAddClicked() {
@@ -82,7 +84,7 @@ public class RecyclerActivity extends DrawerActivity implements ItemClickListene
 
             @Override
             public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
-                int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
+                int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN | ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
                 int swipeFlags = ItemTouchHelper.START | ItemTouchHelper.END;
                 return makeMovementFlags(dragFlags, swipeFlags);
             }
@@ -140,7 +142,17 @@ public class RecyclerActivity extends DrawerActivity implements ItemClickListene
             }
         });
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+
+        gridLayoutManager = new GridLayoutManager(this, 2);
+
+        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                return 2;
+            }
+        });
+
+        recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(mainAdapter);
     }
 
@@ -191,6 +203,19 @@ public class RecyclerActivity extends DrawerActivity implements ItemClickListene
             }
         });
         tilDialog.show();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            gridLayoutManager.setSpanCount(2);
+        } else if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            gridLayoutManager.setSpanCount(4);
+        }
+
+        gridLayoutManager.requestLayout();
     }
 
     @Override
