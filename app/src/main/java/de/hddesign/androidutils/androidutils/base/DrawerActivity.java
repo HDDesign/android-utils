@@ -15,6 +15,7 @@ import de.hddesign.androidutils.androidutils.DPadActivity;
 import de.hddesign.androidutils.androidutils.DialogActivity;
 import de.hddesign.androidutils.androidutils.R;
 import de.hddesign.androidutils.androidutils.RecyclerActivity;
+import de.hddesign.androidutils.androidutils.RulerActivity;
 
 
 public class DrawerActivity extends BaseActivity implements FragmentManager.OnBackStackChangedListener {
@@ -125,6 +126,9 @@ public class DrawerActivity extends BaseActivity implements FragmentManager.OnBa
                     break;
                 case R.id.nav_dialog:
                     startActivity(DialogActivity.newIntent());
+                    break;
+                case R.id.nav_ruler:
+                    startActivity(RulerActivity.newIntent());
                     break;
             }
         }

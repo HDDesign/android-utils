@@ -73,7 +73,7 @@ public class DPad extends View implements View.OnTouchListener, View.OnDragListe
             primaryColor = a.getColor(R.styleable.DPad_primaryColor, Color.rgb(0, 166, 255));
             accentColor = a.getColor(R.styleable.DPad_accentColor, Color.rgb(255, 89, 0));
             chevronColor = a.getColor(R.styleable.DPad_chevronColor, Color.rgb(0, 166, 255));
-            backgroundColor = a.getColor(R.styleable.DPad_backgroundColor, Color.rgb(255, 255, 255));
+            backgroundColor = a.getColor(R.styleable.CommonValues_backgroundColor, Color.rgb(255, 255, 255));
             windowColor = a.getColor(R.styleable.DPad_windowColor, Color.argb(255, 250, 250, 250));
             centerButtonRadius = a.getDimension(R.styleable.DPad_centerButtonRadius, 150);
             buttonPadding = a.getDimension(R.styleable.DPad_buttonPadding, 5);
@@ -81,7 +81,7 @@ public class DPad extends View implements View.OnTouchListener, View.OnDragListe
             chevronSize = a.getDimension(R.styleable.DPad_chevronSize, 25);
             chevronStrokeWidth = a.getDimension(R.styleable.DPad_chevronStrokeWidth, 8);
             chevronPadding = a.getDimension(R.styleable.DPad_chevronPadding, 20);
-            centerTextSize = a.getDimension(R.styleable.DPad_centerTextSize, 25);
+            centerTextSize = a.getDimension(R.styleable.CommonValues_textSize, 25);
             centerText = a.getString(R.styleable.DPad_centerText);
         } finally {
             a.recycle();

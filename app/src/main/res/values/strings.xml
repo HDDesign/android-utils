@@ -48,5 +48,9 @@
     <string name="title">Überschrift</string>
     <string name="hint">Hinweis</string>
     <string name="open_progressdialog">Fortschrittsdialog öffnen</string>
+    <string name="ruler">Lineale</string>
+    <string name="use_imperial_units">inch</string>
+    <string name="text">Text</string>
+    <string name="marks">Markierungen</string>
 
 </resources>
