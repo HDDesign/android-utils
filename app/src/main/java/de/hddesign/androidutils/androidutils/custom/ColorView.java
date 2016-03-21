@@ -60,7 +60,7 @@ public class ColorView extends View {
         TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.ColorView, 0, 0);
 
         try {
-            size = a.getDimension(R.styleable.CommonValues_size, 0);
+            size = a.getDimension(R.styleable.ColorView_size, 0);
             hueCircleStrokeWidth = a.getDimension(R.styleable.ColorView_hueCircleStrokeWidth, 0);
             indicatorRadius = a.getDimension(R.styleable.ColorView_indicatorRadius, 20);
         } finally {
