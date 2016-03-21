@@ -310,6 +310,10 @@ public class ColorView extends View {
         green *= 255;
         blue *= 255;
 
+        red = ((float) Math.ceil(red));
+        green = ((float) Math.ceil(green));
+        blue = ((float) Math.ceil(blue));
+
         if (colorViewCallback != null)
             colorViewCallback.rgbChanged((int) red, (int) green, (int) blue);
     }

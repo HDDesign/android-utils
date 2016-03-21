@@ -23,6 +23,7 @@ public class TextInputLayoutErrorHelper {
 
     private int minLength;
     private int maxLength;
+    private int exactLength;
 
     @StringRes
     private int errorResource;
@@ -33,6 +34,10 @@ public class TextInputLayoutErrorHelper {
 
     public void setMaxLength(int maxLength) {
         this.maxLength = maxLength;
+    }
+
+    public void setExactLength(int exactLength) {
+        this.exactLength = exactLength;
     }
 
     public TextInputLayoutErrorHelper(Context context, EditText et, TextInputLayout til, TilErrorType tilErrorType, @StringRes int errorResource) {
@@ -68,6 +73,7 @@ public class TextInputLayoutErrorHelper {
                     case MIN_LENGTH:
                     case MAX_LENGTH:
                     case MIN_MAX_LENGTH:
+                    case EXACT_LENGTH:
                         if (!s.toString().isEmpty())
                             showError(checkLength(s.length()));
                         break;
@@ -95,6 +101,8 @@ public class TextInputLayoutErrorHelper {
                 return length > maxLength;
             case MIN_MAX_LENGTH:
                 return length < minLength || length > maxLength;
+            case EXACT_LENGTH:
+                return length != exactLength;
             default:
                 return false;
         }
@@ -118,7 +126,7 @@ public class TextInputLayoutErrorHelper {
     }
 
     public enum TilErrorType {
-        MIN_LENGTH, MAX_LENGTH, MIN_MAX_LENGTH
+        MIN_LENGTH, MAX_LENGTH, MIN_MAX_LENGTH, EXACT_LENGTH;
     }
 
     public boolean hasError() {
@@ -126,6 +134,7 @@ public class TextInputLayoutErrorHelper {
             case MIN_LENGTH:
             case MAX_LENGTH:
             case MIN_MAX_LENGTH:
+            case EXACT_LENGTH:
                 if (!et.getText().toString().isEmpty()) {
                     if (showError(checkLength(et.getText().length()))) {
                         animateError();
