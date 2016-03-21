@@ -98,7 +98,7 @@ public class DialogActivity extends DrawerActivity {
     public void openProgressDialog() {
         updateValues();
         final MaterialProgressDialog materialProgressDialog = new MaterialProgressDialog(this, R.style.AppCompatAlertDialogStyle);
-        materialProgressDialog.setMessage("Bitte Warten");
+        materialProgressDialog.setMessage(R.string.please_wait);
         materialProgressDialog.show();
     }
 

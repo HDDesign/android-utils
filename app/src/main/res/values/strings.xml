@@ -57,4 +57,5 @@
     <string name="hex_color">Hex-Farbe</string>
     <string name="hint_hex_color">Farbe als Hexcode</string>
     <string name="error_hex">Farbe muss mit 6 Zeichen definiert werden</string>
+    <string name="please_wait">Bitte Warten</string>
 </resources>
