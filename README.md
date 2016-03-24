@@ -11,7 +11,7 @@ CustomViews min SDK is API-Level 16
 
 Views are fully customizable check out the App to learn more.
 
-<p align="center">
+<p align="left">
   <img src="https://raw.githubusercontent.com/hddesign/android-utils/master/screenshots/drawer.png" width="350"/>
   <img src="https://raw.githubusercontent.com/hddesign/android-utils/master/screenshots/colorpicker.png" width="350"/>
   <img src="https://raw.githubusercontent.com/hddesign/android-utils/master/screenshots/dpad.png" width="350"/>
