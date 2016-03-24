@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="palette_type_array">
+        <item>Vibrant</item>
+        <item>Vibrant Dark</item>
+        <item>Vibrant Light</item>
+        <item>Muted</item>
+        <item>Muted Dark</item>
+        <item>Muted Light</item>
+    </string-array>
+</resources>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/medium_spacing"
+    android:layout_marginRight="@dimen/medium_spacing"
+    android:layout_marginTop="@dimen/medium_spacing"
+    android:clickable="true"
+    android:foreground="@drawable/card_ripple"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    app:cardBackgroundColor="@android:color/white"
+    app:contentPadding="@dimen/medium_spacing">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <de.hddesign.androidutils.androidutils.custom.AspectRatioLayout
+            android:id="@+id/aspect_ratio_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:aspectRatioHeight="1"
+            app:aspectRatioWidth="1">
+
+            <ImageView
+                android:id="@+id/img_main"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </de.hddesign.androidutils.androidutils.custom.AspectRatioLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/medium_spacing">
+
+            <TextView
+                android:id="@+id/txt_pos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:padding="@dimen/small_spacing"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/headline_text"
+                tools:text="@string/lbl_position"/>
+
+            <TextView
+                android:id="@+id/txt_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/txt_pos"
+                android:padding="@dimen/small_spacing"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/headline_text"
+                android:ellipsize="end"
+                android:lines="1"
+                android:layout_toLeftOf="@+id/reorder_item"
+                tools:text="Test"/>
+
+            <ImageView
+                android:id="@+id/reorder_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:clickable="true"
+                android:foreground="@drawable/card_ripple"
+                android:src="@drawable/ic_reorder"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

@@ -40,10 +40,10 @@ public class RulerView extends View {
         TypedArray a = context.getTheme().obtainStyledAttributes(attr, R.styleable.RulerView, 0, 0);
 
         try {
-            backgroundColor = a.getColor(R.styleable.CommonValues_backgroundColor, Color.WHITE);
+            backgroundColor = a.getColor(R.styleable.RulerView_backgroundColor, Color.WHITE);
             indicatorColor = a.getColor(R.styleable.RulerView_rulerIndicatorColor, Color.BLACK);
             textColor = a.getColor(R.styleable.RulerView_textColor, Color.BLACK);
-            textSize = a.getDimension(R.styleable.CommonValues_textSize, 25);
+            textSize = a.getDimension(R.styleable.RulerView_textSize, 25);
             imperialUnits = a.getBoolean(R.styleable.RulerView_inch, false);
         } finally {
             a.recycle();

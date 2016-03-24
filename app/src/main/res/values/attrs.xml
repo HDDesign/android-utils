@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="CommonValues">
-        <attr name="size" format="dimension"/>
-        <attr name="textSize" format="dimension"/>
-        <attr name="backgroundColor" format="color"/>
-    </declare-styleable>
+    <attr name="size" format="dimension"/>
+    <attr name="textSize" format="dimension"/>
+    <attr name="backgroundColor" format="color"/>
 
     <declare-styleable name="ColorView">
+        <attr name="size"/>
         <attr name="hueCircleStrokeWidth" format="dimension"/>
         <attr name="indicatorRadius" format="dimension"/>
     </declare-styleable>
 
     <declare-styleable name="DPad">
+        <attr name="size"/>
+        <attr name="textSize"/>
+        <attr name="backgroundColor"/>
         <attr name="primaryColor" format="color"/>
         <attr name="accentColor" format="color"/>
         <attr name="windowColor" format="color"/>
@@ -25,6 +27,8 @@
     </declare-styleable>
 
     <declare-styleable name="RulerView">
+        <attr name="textSize"/>
+        <attr name="backgroundColor"/>
         <attr name="rulerIndicatorColor" format="color"/>
         <attr name="textColor" format="color"/>
         <attr name="inch" format="boolean"/>

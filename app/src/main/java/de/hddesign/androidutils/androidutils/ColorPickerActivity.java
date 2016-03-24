@@ -92,10 +92,8 @@ public class ColorPickerActivity extends DrawerActivity implements SeekbarCallba
         tilDialog.setTitle(R.string.hex_color);
         tilDialog.setTilHint(R.string.hint_hex_color);
 
-        tilDialog.setTilErrorHelper(TilErrorType.MIN_MAX_LENGTH, R.string.error_hex);
-        tilDialog.getTilErrorHelper().setMinLength(6);
-        tilDialog.getTilErrorHelper().setMaxLength(6);
-
+        tilDialog.setTilErrorHelper(TilErrorType.EXACT_LENGTH, R.string.error_hex);
+        tilDialog.getTilErrorHelper().setExactLength(6);
         tilDialog.setDigits("abcdefABCDEF0123456789", true);
 
         String currentColorString = colorview.getCurrentColorAsHEX();

@@ -12,5 +12,8 @@
     <color name="blue">#0000FF</color>
     <color name="darkText">#6f6f6f</color>
 
+    <color name="snackbar_delete">#f44336</color>
+    <color name="snackbar_restore">#29b6f6</color>
+
     <color name="drawerBackground">#FFFFFF</color>
 </resources>

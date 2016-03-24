@@ -17,7 +17,7 @@ import android.widget.Toast;
 import butterknife.Bind;
 import butterknife.OnClick;
 import de.hddesign.androidutils.androidutils.base.DrawerActivity;
-import de.hddesign.androidutils.androidutils.utils.MaterialProgressDialog;
+import de.hddesign.androidutils.androidutils.utils.ProgressDialog;
 import de.hddesign.androidutils.androidutils.utils.TextInputLayoutDialog;
 import de.hddesign.androidutils.androidutils.utils.TextInputLayoutErrorHelper.TilErrorType;
 
@@ -97,9 +97,9 @@ public class DialogActivity extends DrawerActivity {
     @OnClick(R.id.btn_open_progress_dialog)
     public void openProgressDialog() {
         updateValues();
-        final MaterialProgressDialog materialProgressDialog = new MaterialProgressDialog(this, R.style.AppCompatAlertDialogStyle);
-        materialProgressDialog.setMessage("Bitte Warten");
-        materialProgressDialog.show();
+        final ProgressDialog progressDialog = new ProgressDialog(this, R.style.AppCompatAlertDialogStyle);
+        progressDialog.setMessage(R.string.please_wait);
+        progressDialog.show();
     }
 
     public static Intent newIntent() {

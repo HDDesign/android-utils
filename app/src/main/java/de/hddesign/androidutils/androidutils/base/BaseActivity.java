@@ -12,11 +12,14 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import de.hddesign.androidutils.androidutils.BuildConfig;
 import de.hddesign.androidutils.androidutils.R;
+import de.hddesign.androidutils.androidutils.utils.ProgressDialog;
 
 public class BaseActivity extends AppCompatActivity {
 
     @Bind(R.id.toolbar)
     public Toolbar toolbar;
+
+    protected ProgressDialog progressDialog;
 
     protected static Intent newIntent(Class<? extends AppCompatActivity> activityClass) {
         Intent intent = new Intent();
@@ -90,13 +93,17 @@ public class BaseActivity extends AppCompatActivity {
 
 
     protected void showTitle(String s) {
-        if (getSupportActionBar() != null)
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(s);
+            getSupportActionBar().invalidateOptionsMenu();
+        }
     }
 
     protected void showTitle(@StringRes int titleRes) {
-        if (getSupportActionBar() != null)
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(getString(titleRes));
+            getSupportActionBar().invalidateOptionsMenu();
+        }
     }
 
     public void showSubtitle(CharSequence subtitle) {
@@ -107,5 +114,23 @@ public class BaseActivity extends AppCompatActivity {
     public void showSubtitle(int subtitleId) {
         if (getSupportActionBar() != null)
             getSupportActionBar().setSubtitle(subtitleId);
+    }
+
+    protected void showProgress(@StringRes int message) {
+        progressDialog = new ProgressDialog(this, R.style.AppCompatAlertDialogStyle);
+        progressDialog.setMessage(message);
+        progressDialog.setCanceledOnTouchOutside(false);
+
+        if (!isFinishing()) {
+            progressDialog.show();
+        }
+    }
+
+    protected void hideProgress() {
+        if (progressDialog != null && progressDialog.isShowing()) {
+            if (!isFinishing()) {
+                progressDialog.dismiss();
+            }
+        }
     }
 }

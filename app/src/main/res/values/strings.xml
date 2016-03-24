@@ -57,4 +57,16 @@
     <string name="hex_color">Hex-Farbe</string>
     <string name="hint_hex_color">Farbe als Hexcode</string>
     <string name="error_hex">Farbe muss mit 6 Zeichen definiert werden</string>
+    <string name="please_wait">Bitte Warten</string>
+    <string name="palette">Palette</string>
+    <string name="action_redo">Rückgängig</string>
+    <string name="restored_entry">Eintrag wiederhergestellt</string>
+    <string name="deleted_entry">Eintrag gelöscht</string>
+    <string name="reload_image">Bild wird neu geladen: %s</string>
+    <string name="lbl_span_count">Spalten Anzahl: %d</string>
+    <string name="lbl_aspect_width">Aspekt Breite: %d</string>
+    <string name="lbl_aspect_height">Aspekt Höhe: %d</string>
+    <string name="lbl_img_resolution">Bildauflösung: %dpx</string>
+    <string name="edit_keywords">Schlagwörter bearbeiten</string>
+    <string name="clearing_cache">Cache leeren</string>
 </resources>

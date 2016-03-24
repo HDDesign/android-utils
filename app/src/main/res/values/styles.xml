@@ -22,4 +22,9 @@
         <item name="android:textAllCaps">true</item>
         <item name="android:textSize">@dimen/large_text</item>
     </style>
+
+    <declare-styleable name="AspectRatioLayout">
+        <attr name="aspectRatioWidth" format="integer"/>
+        <attr name="aspectRatioHeight" format="integer"/>
+    </declare-styleable>
 </resources>

@@ -17,6 +17,7 @@ public class LableSliderSeekBarChangeListener implements SeekBar.OnSeekBarChange
     private int resourceId;
     private long id;
     private int offset;
+    private int stepSize;
 
     private SeekbarCallback seekbarCallback;
 
@@ -29,11 +30,16 @@ public class LableSliderSeekBarChangeListener implements SeekBar.OnSeekBarChange
     }
 
     public LableSliderSeekBarChangeListener(Context context, TextView label, int resourceId, int initValue, long id, int offset) {
+        this(context, label, resourceId, initValue, id, offset, 1);
+    }
+
+    public LableSliderSeekBarChangeListener(Context context, TextView label, int resourceId, int initValue, long id, int offset, int stepSize) {
         this.context = context;
         this.label = label;
         this.resourceId = resourceId;
         this.id = id;
         this.offset = offset;
+        this.stepSize = stepSize;
 
         label.setText(String.format(context.getString(resourceId), initValue + offset));
     }
@@ -41,10 +47,10 @@ public class LableSliderSeekBarChangeListener implements SeekBar.OnSeekBarChange
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         if (label != null)
-            label.setText(String.format(context.getString(resourceId), progress + offset));
+            label.setText(String.format(context.getString(resourceId), (progress * stepSize) + offset));
 
         if (seekbarCallback != null)
-            seekbarCallback.onProgressChanged(id, progress + offset, fromUser);
+            seekbarCallback.onProgressChanged(id, (progress * stepSize) + offset, fromUser);
     }
 
     @Override
@@ -55,8 +61,8 @@ public class LableSliderSeekBarChangeListener implements SeekBar.OnSeekBarChange
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
         if (label != null)
-            label.setText(String.format(context.getString(resourceId), (seekBar.getProgress() + offset)));
+            label.setText(String.format(context.getString(resourceId), ((seekBar.getProgress() * stepSize) + offset)));
         if (seekbarCallback != null)
-            seekbarCallback.onStopTrackingTouch(id, (seekBar.getProgress() + offset));
+            seekbarCallback.onStopTrackingTouch(id, ((seekBar.getProgress() * stepSize) + offset));
     }
 }
