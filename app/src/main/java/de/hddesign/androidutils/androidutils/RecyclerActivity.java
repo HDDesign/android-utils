@@ -3,12 +3,18 @@ package de.hddesign.androidutils.androidutils;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.graphics.PorterDuff.Mode;
+import android.graphics.PorterDuffColorFilter;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.TextView;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -31,6 +37,9 @@ public class RecyclerActivity extends DrawerActivity implements ItemClickListene
 
     @Bind(R.id.fab)
     FloatingActionButton fab;
+
+    @Bind(R.id.main_content)
+    CoordinatorLayout mainContent;
 
     private Preferences preferences;
     private GridLayoutManager gridLayoutManager;
@@ -97,10 +106,14 @@ public class RecyclerActivity extends DrawerActivity implements ItemClickListene
                 mainAdapter.reorderItems(fromPosition, toPosition);
                 mainAdapter.notifyItemMoved(fromPosition, toPosition);
 
-                if (fromPosition < toPosition)
-                    mainAdapter.notifyItemRangeChanged(fromPosition, mainAdapter.getItemCount());
-                else
-                    mainAdapter.notifyItemRangeChanged(toPosition, mainAdapter.getItemCount());
+                int count;
+                if (fromPosition < toPosition) {
+                    count = toPosition - fromPosition;
+                    mainAdapter.notifyItemRangeChanged(fromPosition, count + 1);
+                } else {
+                    count = fromPosition - toPosition;
+                    mainAdapter.notifyItemRangeChanged(toPosition, count + 1);
+                }
 
                 preferences.setMainItems(mainAdapter.getItems());
                 return true;
@@ -108,16 +121,57 @@ public class RecyclerActivity extends DrawerActivity implements ItemClickListene
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                int position = viewHolder.getAdapterPosition();
-                MainItem item = mainAdapter.getItem(position);
+                final int position = viewHolder.getAdapterPosition();
+                final MainItem item = mainAdapter.getItem(position);
                 mainAdapter.removeItem(item);
                 mainAdapter.notifyItemRemoved(position);
 
                 mainAdapter.rewriteIndexes();
 
-                mainAdapter.notifyItemRangeChanged(position, mainAdapter.getItemCount());
+                int count = mainAdapter.getItemCount() - position;
+                mainAdapter.notifyItemRangeChanged(position, count);
 
                 preferences.setMainItems(mainAdapter.getItems());
+
+                Snackbar snackbar = Snackbar
+                        .make(mainContent, R.string.deleted_entry, Snackbar.LENGTH_LONG)
+                        .setAction(R.string.action_redo, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                mainAdapter.addItemAtPosition(position, item);
+                                mainAdapter.notifyItemInserted(position);
+                                mainAdapter.rewriteIndexes();
+
+                                int count = mainAdapter.getItemCount() - position;
+                                mainAdapter.notifyItemRangeChanged(position, count);
+
+                                preferences.setMainItems(mainAdapter.getItems());
+
+                                Snackbar snackbar1 = Snackbar.make(mainContent, R.string.restored_entry, Snackbar.LENGTH_SHORT);
+
+                                View snackbarLayout = snackbar1.getView();
+                                snackbarLayout.getBackground().mutate().setColorFilter(new PorterDuffColorFilter(getResources().getColor(R.color.snackbar_restore), Mode.SRC_IN));
+
+                                TextView textView = (TextView) snackbarLayout.findViewById(android.support.design.R.id.snackbar_text);
+                                textView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_undo, 0, 0, 0);
+                                textView.setCompoundDrawablePadding(getResources().getDimensionPixelOffset(R.dimen.snackbar_icon_padding));
+                                textView.setGravity(Gravity.CENTER_VERTICAL);
+
+                                snackbar1.show();
+                            }
+                        });
+
+                snackbar.setActionTextColor(Color.WHITE);
+
+                View snackbarLayout = snackbar.getView();
+                snackbarLayout.getBackground().mutate().setColorFilter(new PorterDuffColorFilter(getResources().getColor(R.color.snackbar_delete), Mode.SRC_IN));
+
+                TextView textView = (TextView) snackbarLayout.findViewById(android.support.design.R.id.snackbar_text);
+                textView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_delete, 0, 0, 0);
+                textView.setCompoundDrawablePadding(getResources().getDimensionPixelOffset(R.dimen.snackbar_icon_padding));
+                textView.setGravity(Gravity.CENTER_VERTICAL);
+
+                snackbar.show();
             }
 
             @Override

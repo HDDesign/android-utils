@@ -2,6 +2,8 @@
 <manifest package="de.hddesign.androidutils.androidutils"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,7 +13,8 @@
 
         <activity
             android:name=".RecyclerActivity"
-            android:configChanges="orientation|screenSize">
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/AndroidUtilTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -42,6 +45,13 @@
 
         <activity
             android:name=".RulerActivity"
+            android:theme="@style/AndroidUtilTheme">
+        </activity>
+
+        <activity
+            android:name=".PaletteActivity"
+            android:configChanges="orientation|screenSize|keyboard|screenSize"
+            android:windowSoftInputMode="adjustResize"
             android:theme="@style/AndroidUtilTheme">
         </activity>
 

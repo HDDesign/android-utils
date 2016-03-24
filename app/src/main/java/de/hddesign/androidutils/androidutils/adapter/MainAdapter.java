@@ -45,18 +45,24 @@ public class MainAdapter extends RecyclerView.Adapter<BaseViewHolder<MainItem>> 
         if (fromPosition < toPosition) {
             for (int i = fromPosition; i < toPosition; i++) {
                 Collections.swap(items, i, i + 1);
+                items.get(i).setIndex(i + 1);
+                items.get(i + 1).setIndex(i + 2);
             }
         } else {
             for (int i = fromPosition; i > toPosition; i--) {
                 Collections.swap(items, i, i - 1);
+                items.get(i).setIndex(i + 1);
+                items.get(i - 1).setIndex(i);
             }
         }
-
-        rewriteIndexes();
     }
 
     public void addItem(MainItem item) {
         items.add(item);
+    }
+
+    public void addItemAtPosition(int position, MainItem item) {
+        items.add(position, item);
     }
 
     public void removeItem(MainItem item) {
@@ -70,6 +76,7 @@ public class MainAdapter extends RecyclerView.Adapter<BaseViewHolder<MainItem>> 
     public ArrayList<MainItem> getItems() {
         return items;
     }
+
 
     public void rewriteIndexes() {
         int i = 1;

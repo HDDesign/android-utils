@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    android:id="@+id/main_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/material_dialog_spacing"
+            android:layout_marginRight="@dimen/material_dialog_spacing"
+            android:layout_marginTop="@dimen/medium_spacing">
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/til"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/iv_add">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <ImageView
+                android:id="@+id/iv_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/card_ripple"
+                android:padding="@dimen/medium_spacing"
+                android:src="@drawable/ic_add"
+                android:tint="@color/colorAccent"/>
+        </RelativeLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_items"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/material_dialog_spacing"
+            android:layout_marginRight="@dimen/material_dialog_spacing"
+            android:layout_marginTop="@dimen/medium_spacing"/>
+
+    </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

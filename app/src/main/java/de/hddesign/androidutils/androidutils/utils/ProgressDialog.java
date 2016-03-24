@@ -9,13 +9,13 @@ import android.widget.TextView;
 import de.hddesign.androidutils.androidutils.R;
 
 
-public class MaterialProgressDialog extends AlertDialog {
+public class ProgressDialog extends AlertDialog {
 
-    private MaterialProgressDialog alertDialog;
+    private ProgressDialog alertDialog;
     private Context context;
     private TextView message;
 
-    public MaterialProgressDialog(Context context, int themeResId) {
+    public ProgressDialog(Context context, int themeResId) {
         super(context, themeResId);
 
         View v = getLayoutInflater().inflate(R.layout.dialog_progress, null);
