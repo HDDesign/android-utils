@@ -1,4 +1,4 @@
-package de.hddesign.androidutils.androidutils;
+package de.hddesign.androidutils.androidutils.ui;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -18,12 +18,13 @@ import android.widget.TextView;
 
 import butterknife.Bind;
 import butterknife.OnClick;
-import de.hddesign.androidutils.androidutils.base.DrawerActivity;
+import de.hddesign.androidutils.androidutils.R;
+import de.hddesign.androidutils.androidutils.base.DrawerCompatActivity;
 import de.hddesign.androidutils.androidutils.custom.RulerView;
 import de.hddesign.androidutils.androidutils.utils.LableSliderSeekBarChangeListener;
 import de.hddesign.androidutils.androidutils.utils.LableSliderSeekBarChangeListener.SeekbarCallback;
 
-public class RulerActivity extends DrawerActivity implements SeekbarCallback {
+public class RulerActivity extends DrawerCompatActivity implements SeekbarCallback {
 
     private static int PICK_COLOR = 1999;
 
@@ -154,7 +155,7 @@ public class RulerActivity extends DrawerActivity implements SeekbarCallback {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == PICK_COLOR && resultCode == ColorPickerActivity.RESULT_OK) {
+        if (requestCode == PICK_COLOR && resultCode == RESULT_OK) {
             int field = data.getIntExtra(ColorPickerActivity.INDEX, 0);
             int color = data.getIntExtra(ColorPickerActivity.PICKED_COLOR, 0);
 

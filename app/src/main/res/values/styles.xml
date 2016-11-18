@@ -1,9 +1,10 @@
 <resources>
 
-    <style name="AndroidUtilTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AndroidUtilTheme" parent="Theme.AppCompat.Light">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowContentTransitions">true</item>
     </style>
 
     <style name="AppCompatAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">

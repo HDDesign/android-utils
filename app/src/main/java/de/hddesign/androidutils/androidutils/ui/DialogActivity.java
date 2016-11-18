@@ -1,4 +1,4 @@
-package de.hddesign.androidutils.androidutils;
+package de.hddesign.androidutils.androidutils.ui;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -16,12 +16,13 @@ import android.widget.Toast;
 
 import butterknife.Bind;
 import butterknife.OnClick;
-import de.hddesign.androidutils.androidutils.base.DrawerActivity;
+import de.hddesign.androidutils.androidutils.R;
+import de.hddesign.androidutils.androidutils.base.DrawerCompatActivity;
 import de.hddesign.androidutils.androidutils.utils.ProgressDialog;
 import de.hddesign.androidutils.androidutils.utils.TextInputLayoutDialog;
 import de.hddesign.androidutils.androidutils.utils.TextInputLayoutErrorHelper.TilErrorType;
 
-public class DialogActivity extends DrawerActivity {
+public class DialogActivity extends DrawerCompatActivity {
 
     private String title;
     private String hint;

@@ -1,4 +1,4 @@
-package de.hddesign.androidutils.androidutils;
+package de.hddesign.androidutils.androidutils.ui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -37,10 +37,11 @@ import java.util.Set;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+import de.hddesign.androidutils.androidutils.R;
 import de.hddesign.androidutils.androidutils.adapter.PaletteAdapter;
 import de.hddesign.androidutils.androidutils.adapter.PaletteAdapter.ItemClickListener;
 import de.hddesign.androidutils.androidutils.adapter.PaletteAdapter.ItemViewHolder;
-import de.hddesign.androidutils.androidutils.base.DrawerActivity;
+import de.hddesign.androidutils.androidutils.base.DrawerCompatActivity;
 import de.hddesign.androidutils.androidutils.model.PaletteItem;
 import de.hddesign.androidutils.androidutils.utils.LableSliderSeekBarChangeListener;
 import de.hddesign.androidutils.androidutils.utils.LableSliderSeekBarChangeListener.SeekbarCallback;
@@ -48,7 +49,7 @@ import de.hddesign.androidutils.androidutils.utils.ListDialog;
 import de.hddesign.androidutils.androidutils.utils.Preferences;
 import de.hddesign.androidutils.androidutils.utils.TextInputLayoutErrorHelper.TilErrorType;
 
-public class PaletteActivity extends DrawerActivity implements ItemClickListener, SeekbarCallback {
+public class PaletteActivity extends DrawerCompatActivity implements ItemClickListener, SeekbarCallback {
 
     private static long SPAN_COUNT = 101;
     private static long ASPECT_WIDTH = 102;

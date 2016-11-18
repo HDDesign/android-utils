@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -12,8 +13,48 @@
         android:theme="@style/AndroidUtilTheme">
 
         <activity
-            android:name=".RecyclerActivity"
+            android:name=".ui.RecyclerActivity"
             android:configChanges="orientation|screenSize"
+            android:theme="@style/AndroidUtilTheme">
+        </activity>
+
+        <activity
+            android:name=".ui.ColorPickerActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AndroidUtilTheme">
+        </activity>
+
+        <activity
+            android:name=".ui.DPadActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale"
+            android:screenOrientation="portrait"
+            android:theme="@style/AndroidUtilTheme"
+            android:windowSoftInputMode="adjustNothing">
+        </activity>
+
+        <activity
+            android:name=".ui.DialogActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AndroidUtilTheme">
+        </activity>
+
+        <activity
+            android:name=".ui.RulerActivity"
+            android:theme="@style/AndroidUtilTheme">
+        </activity>
+
+        <activity
+            android:name=".ui.PaletteActivity"
+            android:configChanges="orientation|screenSize|keyboard|screenSize"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/AndroidUtilTheme">
+        </activity>
+
+        <activity
+            android:name=".ui.MaterialActivity"
+            android:configChanges="orientation|screenSize|keyboard|screenSize"
+            android:windowSoftInputMode="adjustResize"
             android:theme="@style/AndroidUtilTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -23,40 +64,11 @@
         </activity>
 
         <activity
-            android:name=".ColorPickerActivity"
-            android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait"
-            android:theme="@style/AndroidUtilTheme">
-        </activity>
+            android:name=".ui.MaterialDetailActivity"
+            android:theme="@style/AndroidUtilTheme"/>
 
         <activity
-            android:name=".DPadActivity"
-            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale"
-            android:screenOrientation="portrait"
-            android:theme="@style/AndroidUtilTheme"
-            android:windowSoftInputMode="adjustNothing">
-        </activity>
-
-        <activity
-            android:name=".DialogActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AndroidUtilTheme">
-        </activity>
-
-        <activity
-            android:name=".RulerActivity"
-            android:theme="@style/AndroidUtilTheme">
-        </activity>
-
-        <activity
-            android:name=".PaletteActivity"
-            android:configChanges="orientation|screenSize|keyboard|screenSize"
-            android:windowSoftInputMode="adjustResize"
-            android:theme="@style/AndroidUtilTheme">
-        </activity>
-
-        <activity
-            android:name=".InfoActivity"
+            android:name=".ui.InfoActivity"
             android:theme="@style/AndroidUtilTheme">
         </activity>
 

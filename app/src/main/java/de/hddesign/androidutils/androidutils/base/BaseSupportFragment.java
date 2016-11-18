@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import butterknife.ButterKnife;
 
-public class BaseFragment<CONTROLLER> extends Fragment {
+public class BaseSupportFragment<CONTROLLER> extends Fragment {
 
     @Nullable
     @Override
@@ -43,19 +43,19 @@ public class BaseFragment<CONTROLLER> extends Fragment {
     }
 
     protected void showTitle(String title) {
-        ((BaseActivity) getController()).showTitle(title);
+        ((BaseCompatActivity) getController()).showTitle(title);
     }
 
     protected void showTitle(@StringRes int titleRes) {
-        ((BaseActivity) getController()).showTitle(titleRes);
+        ((BaseCompatActivity) getController()).showTitle(titleRes);
     }
 
     protected void showSubTitle(String title) {
-        ((BaseActivity) getController()).showSubtitle(title);
+        ((BaseCompatActivity) getController()).showSubtitle(title);
     }
 
     protected void showSubTitle(@StringRes int titleRes) {
-        ((BaseActivity) getController()).showSubtitle(titleRes);
+        ((BaseCompatActivity) getController()).showSubtitle(titleRes);
     }
 
     @LayoutRes

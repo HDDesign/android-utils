@@ -1,4 +1,4 @@
-package de.hddesign.androidutils.androidutils;
+package de.hddesign.androidutils.androidutils.ui;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -17,7 +17,8 @@ import android.widget.TextView;
 
 import butterknife.Bind;
 import butterknife.OnClick;
-import de.hddesign.androidutils.androidutils.base.DrawerActivity;
+import de.hddesign.androidutils.androidutils.R;
+import de.hddesign.androidutils.androidutils.base.DrawerCompatActivity;
 import de.hddesign.androidutils.androidutils.custom.ColorView;
 import de.hddesign.androidutils.androidutils.custom.ColorView.ColorViewCallback;
 import de.hddesign.androidutils.androidutils.utils.LableSliderSeekBarChangeListener;
@@ -25,7 +26,7 @@ import de.hddesign.androidutils.androidutils.utils.LableSliderSeekBarChangeListe
 import de.hddesign.androidutils.androidutils.utils.TextInputLayoutDialog;
 import de.hddesign.androidutils.androidutils.utils.TextInputLayoutErrorHelper.TilErrorType;
 
-public class ColorPickerActivity extends DrawerActivity implements SeekbarCallback, ColorViewCallback {
+public class ColorPickerActivity extends DrawerCompatActivity implements SeekbarCallback, ColorViewCallback {
 
     public static final String PICKED_COLOR = "pickedColor";
     public static final String INDEX = "index";

@@ -10,11 +10,13 @@ import android.view.WindowManager.LayoutParams;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import de.hddesign.androidutils.androidutils.App;
 import de.hddesign.androidutils.androidutils.BuildConfig;
 import de.hddesign.androidutils.androidutils.R;
+import de.hddesign.androidutils.androidutils.network.RestService;
 import de.hddesign.androidutils.androidutils.utils.ProgressDialog;
 
-public class BaseActivity extends AppCompatActivity {
+public class BaseCompatActivity extends AppCompatActivity {
 
     @Bind(R.id.toolbar)
     public Toolbar toolbar;
@@ -30,6 +32,7 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
+        ButterKnife.setDebug(true);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
     }
@@ -38,19 +41,19 @@ public class BaseActivity extends AppCompatActivity {
         void adapt(FragmentTransaction transaction);
     }
 
-    public BaseFragment getCurrentFragment() {
-        return (BaseFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+    public BaseSupportFragment getCurrentFragment() {
+        return (BaseSupportFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
     }
 
-    protected int showFragment(BaseFragment fragment) {
+    protected int showFragment(BaseSupportFragment fragment) {
         return showFragment(fragment, true);
     }
 
-    protected int showFragment(BaseFragment fragment, boolean addToBackStack) {
+    protected int showFragment(BaseSupportFragment fragment, boolean addToBackStack) {
         return showFragment(fragment, addToBackStack, null);
     }
 
-    protected int showFragment(BaseFragment fragment, boolean addToBackStack, FragmentTransactionAdapter adapter) {
+    protected int showFragment(BaseSupportFragment fragment, boolean addToBackStack, FragmentTransactionAdapter adapter) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
         if (adapter != null)
@@ -67,13 +70,13 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     protected final void updateTitle() {
-        BaseFragment current = getCurrentFragment();
+        BaseSupportFragment current = getCurrentFragment();
         if (current != null) {
             updateTitle(current);
         }
     }
 
-    protected void updateTitle(BaseFragment current) {
+    protected void updateTitle(BaseSupportFragment current) {
         String title = current.getDynamicTitle();
         if (title == null) {
             int titleRes = current.getTitleRes();
@@ -132,5 +135,9 @@ public class BaseActivity extends AppCompatActivity {
                 progressDialog.dismiss();
             }
         }
+    }
+
+    protected RestService getRestService() {
+        return ((App) getApplication()).getRestService();
     }
 }

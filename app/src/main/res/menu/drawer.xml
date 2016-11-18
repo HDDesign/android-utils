@@ -38,6 +38,12 @@
             android:title="@string/palette"/>
 
         <item
+            android:id="@+id/nav_material"
+            android:icon="@drawable/ic_material"
+            android:orderInCategory="1"
+            android:title="@string/material"/>
+
+        <item
             android:id="@+id/nav_info"
             android:icon="@drawable/ic_info_outline"
             android:orderInCategory="1"

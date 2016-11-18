@@ -1,4 +1,4 @@
-package de.hddesign.androidutils.androidutils;
+package de.hddesign.androidutils.androidutils.ui;
 
 import android.app.ActivityManager;
 import android.app.ActivityManager.MemoryInfo;
@@ -14,9 +14,10 @@ import android.telephony.TelephonyManager;
 import android.widget.TextView;
 
 import butterknife.Bind;
-import de.hddesign.androidutils.androidutils.base.DrawerActivity;
+import de.hddesign.androidutils.androidutils.R;
+import de.hddesign.androidutils.androidutils.base.DrawerCompatActivity;
 
-public class InfoActivity extends DrawerActivity {
+public class InfoActivity extends DrawerCompatActivity {
 
     @Bind(R.id.txt_info)
     TextView txtInfo;

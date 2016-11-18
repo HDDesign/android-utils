@@ -10,17 +10,18 @@ import android.view.MenuItem;
 import android.view.View;
 
 import butterknife.Bind;
-import de.hddesign.androidutils.androidutils.ColorPickerActivity;
-import de.hddesign.androidutils.androidutils.DPadActivity;
-import de.hddesign.androidutils.androidutils.DialogActivity;
-import de.hddesign.androidutils.androidutils.InfoActivity;
-import de.hddesign.androidutils.androidutils.PaletteActivity;
 import de.hddesign.androidutils.androidutils.R;
-import de.hddesign.androidutils.androidutils.RecyclerActivity;
-import de.hddesign.androidutils.androidutils.RulerActivity;
+import de.hddesign.androidutils.androidutils.ui.ColorPickerActivity;
+import de.hddesign.androidutils.androidutils.ui.DPadActivity;
+import de.hddesign.androidutils.androidutils.ui.DialogActivity;
+import de.hddesign.androidutils.androidutils.ui.InfoActivity;
+import de.hddesign.androidutils.androidutils.ui.MaterialActivity;
+import de.hddesign.androidutils.androidutils.ui.PaletteActivity;
+import de.hddesign.androidutils.androidutils.ui.RecyclerActivity;
+import de.hddesign.androidutils.androidutils.ui.RulerActivity;
 
 
-public class DrawerActivity extends BaseActivity implements FragmentManager.OnBackStackChangedListener {
+public class DrawerCompatActivity extends BaseCompatActivity implements FragmentManager.OnBackStackChangedListener {
 
     private static final int NAVDRAWER_LAUNCH_DELAY = 250;
 
@@ -85,11 +86,22 @@ public class DrawerActivity extends BaseActivity implements FragmentManager.OnBa
                 onBackPressed();
             }
         });
-        drawerLayout.setDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
         getSupportFragmentManager().addOnBackStackChangedListener(this);
         onBackStackChanged();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+    }
+
+    @Override
+    protected void onPause() {
+        drawerLayout.removeDrawerListener(actionBarDrawerToggle);
+        super.onPause();
     }
 
     protected void openDrawer() {
@@ -134,6 +146,9 @@ public class DrawerActivity extends BaseActivity implements FragmentManager.OnBa
                     break;
                 case R.id.nav_palette:
                     startActivity(PaletteActivity.newIntent());
+                    break;
+                case R.id.nav_material:
+                    startActivity(MaterialActivity.newIntent());
                     break;
                 case R.id.nav_info:
                     startActivity(InfoActivity.newIntent());

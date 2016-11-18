@@ -1,4 +1,4 @@
-package de.hddesign.androidutils.androidutils;
+package de.hddesign.androidutils.androidutils.ui;
 
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -18,16 +18,17 @@ import android.widget.TextView;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+import de.hddesign.androidutils.androidutils.R;
 import de.hddesign.androidutils.androidutils.adapter.MainAdapter;
 import de.hddesign.androidutils.androidutils.adapter.MainAdapter.ItemClickListener;
 import de.hddesign.androidutils.androidutils.adapter.MainAdapter.ItemViewHolder;
-import de.hddesign.androidutils.androidutils.base.DrawerActivity;
+import de.hddesign.androidutils.androidutils.base.DrawerCompatActivity;
 import de.hddesign.androidutils.androidutils.model.MainItem;
 import de.hddesign.androidutils.androidutils.utils.Preferences;
 import de.hddesign.androidutils.androidutils.utils.TextInputLayoutDialog;
 import de.hddesign.androidutils.androidutils.utils.TextInputLayoutErrorHelper.TilErrorType;
 
-public class RecyclerActivity extends DrawerActivity implements ItemClickListener {
+public class RecyclerActivity extends DrawerCompatActivity implements ItemClickListener {
 
     private MainAdapter mainAdapter;
     private ItemTouchHelper itemTouchHelper;
@@ -219,7 +220,7 @@ public class RecyclerActivity extends DrawerActivity implements ItemClickListene
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == 0 && resultCode == ColorPickerActivity.RESULT_OK) {
+        if (requestCode == 0 && resultCode == RESULT_OK) {
             int index = data.getIntExtra(ColorPickerActivity.INDEX, 0);
             mainAdapter.getItem(index).setColor(data.getIntExtra(ColorPickerActivity.PICKED_COLOR, 0));
             mainAdapter.notifyItemChanged(index);
